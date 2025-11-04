@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_seo_seos",
+  "info": {
+    "displayName": "seo",
+    "icon": "earth"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true
+    },
+    "metaKeywords": {
+      "type": "text",
+      "required": true
+    },
+    "schemaType": {
+      "type": "enumeration",
+      "enum": [
+        "WebPage",
+        "Article",
+        "Product",
+        "CollectionPage",
+        "Event",
+        "FAQPage",
+        "LocalBusiness"
+      ],
+      "required": true
+    },
+    "llmSummary": {
+      "type": "blocks"
+    },
+    "seoImage": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

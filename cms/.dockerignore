@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build/cache artifacts
+dist
+build
+.cache
+
+# Strapi public assets (uploaded media)
+public/uploads
+
+# System files
+.DS_Store
+
+# Env files (compose provides them at runtime)
+.env
+.env.*
+!.env.example
+
+# VCS
+.git
+.gitignore

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_element_lockups",
+  "info": {
+    "displayName": "lockup",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "leadin": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "badge": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "legal": {
+      "type": "string"
+    }
+  }
+}

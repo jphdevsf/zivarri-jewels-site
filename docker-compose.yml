@@ -1,0 +1,77 @@
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: strapidb
+      POSTGRES_USER: strapiuser
+      POSTGRES_PASSWORD: a1w2s3d4
+    # keep Postgres internal to avoid host port conflicts
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U strapiuser -d strapidb']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  strapi-dev:
+    build: ./cms
+    command: npm run start-dev
+    profiles: ["dev"]
+    ports:
+      - '1337:1337'
+    volumes:
+      - ./cms:/app
+      - /app/node_modules
+      - /app/.cache
+    env_file:
+      - ./cms/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  strapi-prod:
+    build: ./cms
+    command: npm run start-prod
+    profiles: ["prod"]
+    ports:
+      - '1337:1337'
+    volumes:
+      - ./cms:/app
+    env_file:
+      - ./cms/.env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+  frontend-dev:
+    build: ./frontend
+    command: npm run start-dev
+    profiles: ["dev"]
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    env_file:
+      - ./frontend/.env.local
+    depends_on:
+      strapi-dev:
+        condition: service_started
+
+  frontend-prod:
+    build: ./frontend
+    command: npm run start-prod
+    profiles: ["prod"]
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - ./frontend/.env.production
+    depends_on:
+      strapi-prod:
+        condition: service_started
+
+volumes:
+  pgdata:
