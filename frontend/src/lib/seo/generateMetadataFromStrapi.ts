@@ -52,7 +52,7 @@ export async function generateMetadataFromStrapi(slug: string): Promise<Metadata
       description: seo?.metaDescription || page.title,
       url: `https://yourdomain.com/${slug}`,
       images: imageUrl ? [{ url: imageUrl }] : [],
-      type: mapSchemaTypeToOg((seo as any)?.schemaType),
+      type: mapSchemaTypeToOg(seo?.schemaType as string | undefined),
     },
     twitter: {
       card: 'summary_large_image',
