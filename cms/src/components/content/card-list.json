@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_content_card_lists",
+  "info": {
+    "displayName": "cardList",
+    "icon": "server",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.card"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "tertiary"
+      ]
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_content_section_headers",
+  "info": {
+    "displayName": "Text Section",
+    "icon": "layer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "blocks"
+    }
+  }
+}

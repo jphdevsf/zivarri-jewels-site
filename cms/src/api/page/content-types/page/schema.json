@@ -16,7 +16,8 @@
       "type": "string"
     },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "title"
     },
     "published": {
       "type": "boolean"
@@ -27,7 +28,10 @@
     "banners": {
       "type": "dynamiczone",
       "components": [
-        "content.hero"
+        "content.hero",
+        "content.gallery",
+        "content.card-list",
+        "content.section-header"
       ]
     },
     "seo": {

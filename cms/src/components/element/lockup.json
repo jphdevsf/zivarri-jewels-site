@@ -2,7 +2,8 @@
   "collectionName": "components_element_lockups",
   "info": {
     "displayName": "lockup",
-    "icon": "layer"
+    "icon": "layer",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -23,6 +24,11 @@
     },
     "legal": {
       "type": "string"
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.link"
     }
   }
 }
