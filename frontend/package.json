@@ -6,7 +6,8 @@
     "dev": "npx next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "start:env": "npm run start-prod",
     "start-dev": "NODE_ENV=development npm run dev",
     "start-prod": "NODE_ENV=production npm run build && npm run start"
