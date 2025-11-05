@@ -1,21 +1,21 @@
-import { notFound } from 'next/navigation';
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
-import { generateMetadataFromStrapi } from '@/lib/seo/generateMetadataFromStrapi';
-import { getPageBySlug } from '@/lib/strapi/client';
+import { notFound } from 'next/navigation'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { generateMetadataFromStrapi } from '@/lib/seo/generateMetadataFromStrapi'
+import { getPageBySlug } from '@/lib/strapi/client'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  return await generateMetadataFromStrapi('home'); // or 'index' if that's your slug
+  const { slug } = await params
+  return await generateMetadataFromStrapi('home')
 }
 
 export default async function HomePage() {
-  const page = await getPageBySlug('home', { next: { revalidate: 60 } });
-  if (!page) return notFound();
+  const page = await getPageBySlug('home', { next: { revalidate: 60 } })
+  if (!page) return notFound()
   return (
     <main>
       <BlocksRenderer content={page.text ?? []} />
     </main>
-  );
+  )
 }
 
 // import Image from "next/image";
