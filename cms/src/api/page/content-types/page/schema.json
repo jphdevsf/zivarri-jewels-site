@@ -22,9 +22,6 @@
     "published": {
       "type": "boolean"
     },
-    "text": {
-      "type": "blocks"
-    },
     "banners": {
       "type": "dynamiczone",
       "components": [

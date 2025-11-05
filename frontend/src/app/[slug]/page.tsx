@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer';
 import { generateMetadataFromStrapi } from '@/lib/seo/generateMetadataFromStrapi';
+import { getPageBySlug } from '@/lib/strapi/client';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -9,16 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page( { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const res = await fetch(`http://strapi-dev:1337/api/pages?filters[slug][$eq]=${slug}&populate=*`);
-  const data = await res.json();
-  
-  if (!data?.data || data.data.length === 0) return notFound();
-  
-  const page = data.data[0];
+  const page = await getPageBySlug(slug, { next: { revalidate: 60 } });
   if (!page) return notFound();
   return (
     <main>
-      <BlocksRenderer content={page.text} />
+      <BlocksRenderer content={page.text ?? []} />
     </main>
   );
 }
