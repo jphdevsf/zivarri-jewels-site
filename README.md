@@ -1,6 +1,6 @@
 # 🛠 Zivarri Jewels Site — Monorepo Stack
 
-This project is a full-stack monorepo powered by Next.js, Strapi, and PostgreSQL, containerized with Docker and orchestrated via Docker Compose. It supports both local development and production deployment using Compose profiles.
+This repo is a full-stack website and monorepo powered by Next.js, Strapi, and PostgreSQL, containerized with Docker and orchestrated via Docker Compose. This site is still under development and we're in the content modeling phase (we as in me, myself, and AI).
 
 ## 📦 Stack Overview
 
