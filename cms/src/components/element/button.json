@@ -2,7 +2,8 @@
   "collectionName": "components_element_buttons",
   "info": {
     "displayName": "Button",
-    "icon": "arrowRight"
+    "icon": "arrowRight",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -19,6 +20,11 @@
         "secondary",
         "tertiary"
       ]
+    },
+    "hierarchy": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.hierarchy"
     }
   }
 }

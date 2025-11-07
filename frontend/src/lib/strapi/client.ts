@@ -1,81 +1,75 @@
 import type { BlocksContent } from '@strapi/blocks-react-renderer'
+import qs from 'qs'
 
 // Base Strapi URL. Prefer NEXT_PUBLIC_STRAPI_URL for both server and client usage.
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || process.env.STRAPI_URL || 'http://strapi-dev:1337'
 
-// Strapi v5 response shapes (flattened in data, no attributes wrapper)
-type StrapiListResponse<T> = { data: Array<T & { id: number }>; meta?: unknown }
+// Generic Strapi response shapes
+type StrapiItem<T> = { id: number; attributes?: T } & Record<string, unknown>;
+type StrapiListResponse<T> = { data: Array<StrapiItem<T>>; meta?: unknown };
 
-// Minimal media shape helper types
-type RecordObject = Record<string, unknown>
-function isRecord(value: unknown): value is RecordObject {
-  return typeof value === 'object' && value !== null
-}
-
-export type StrapiMedia =
-  | { url?: string }
-  | { attributes?: { url?: string } | null }
-  | { data?: { url?: string } | { attributes?: { url?: string } } | null }
-
-// Domain types
-export type SEO = {
-  metaTitle?: string
-  metaDescription?: string
-  metaKeywords?: string
-  schemaType?:
-  | 'WebPage'
-  | 'Article'
-  | 'Product'
-  | 'CollectionPage'
-  | 'Event'
-  | 'FAQPage'
-  | 'LocalBusiness'
-  llmSummary?: BlocksContent | null
-  seoImage?: StrapiMedia | null
-} | null
-
+// Normalized frontend types
 export type Page = {
-  id: number
-  documentId?: string
-  title: string
-  slug: string
-  published?: boolean
-  text?: BlocksContent | null
-  banners?: unknown
-  seo?: SEO
+  id: number;
+  title: string;
+  slug: string;
+  published?: boolean;
+  text?: BlocksContent | null;
+  banners?: unknown;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    metaKeywords?: string;
+    schemaType?: string;
+    llmSummary?: BlocksContent | null;
+    seoImage?: any;
+  } | null;
+};
+
+// Helper to normalize Strapi v4 entries (flattens attributes)
+function normalizeEntry<T>(item: StrapiItem<T>): T & { id: number } {
+  if (!item) return item as unknown as T & { id: number }
+  const { id, attributes, ...rest } = item as any
+  return (attributes ? { id, ...attributes } : { id, ...(rest as object) }) as T & { id: number }
 }
 
-// Returns an absolute URL for a Strapi media field (handles common Strapi shapes)
-export function getMediaUrl(media: StrapiMedia | undefined | null): string | undefined {
+// Returns an absolute URL for a Strapi media field (handles both data.url and data.attributes.url)
+interface StrapiMedia {
+  url?: string
+  data?: {
+    url?: string
+    attributes?: {
+      url?: string
+    }
+  }
+  attributes?: {
+    url?: string
+  }
+}
+
+export function getMediaUrl(media: unknown): string | undefined {
   if (!media) return undefined
 
-  let url: unknown
+  if (typeof media === 'string') return media
 
-  if (isRecord(media) && typeof (media as RecordObject).url === 'string') {
-    url = (media as RecordObject).url
-  } else if (isRecord(media) && isRecord((media as RecordObject).data)) {
-    const data = (media as RecordObject).data as RecordObject
-    if (typeof data.url === 'string') {
-      url = data.url
-    } else if (isRecord(data.attributes) && typeof (data.attributes as RecordObject).url === 'string') {
-      url = (data.attributes as RecordObject).url
-    }
-  } else if (isRecord(media) && isRecord((media as RecordObject).attributes)) {
-    const attrs = (media as RecordObject).attributes as RecordObject
-    if (typeof attrs.url === 'string') url = attrs.url
+  if (typeof media === 'object' && media !== null) {
+    const mediaObj = media as StrapiMedia
+    return (
+      mediaObj.url ||
+      mediaObj.data?.url ||
+      mediaObj.data?.attributes?.url ||
+      mediaObj.attributes?.url
+    )
   }
 
-  if (typeof url !== 'string' || url.length === 0) return undefined
-  return url.startsWith('http') ? url : `${STRAPI_URL}${url}`
+  return undefined
 }
-
-type NextFetchOptions = { revalidate?: number | false; tags?: string[] }
 
 // Thin wrapper around fetch for Strapi
 export async function strapiFetch<T = unknown>(
   endpoint: string,
-  init?: RequestInit & { next?: NextFetchOptions }
+  init?: RequestInit & { next?: { revalidate?: number | false; tags?: string[] } }
 ): Promise<T> {
   const url = `${STRAPI_URL}${endpoint}`
   const res = await fetch(url, init)
@@ -85,13 +79,48 @@ export async function strapiFetch<T = unknown>(
   return (await res.json()) as T
 }
 
-// Domain-specific queries (Strapi v5)
-export async function getPageBySlug(
-  slug: string,
-  init?: RequestInit & { next?: NextFetchOptions }
-): Promise<Page | null> {
-  const query = `?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
-  const json = await strapiFetch<StrapiListResponse<Page>>(`/api/pages${query}`, init)
+export async function getPageBySlug(slug: string): Promise<Page | null> {
+  const query = qs.stringify({
+    filters: {
+      slug: {
+        $eq: slug,
+      },
+    },
+    populate: '*',
+  }, {
+    encodeValuesOnly: true, // avoids encoding keys like filters[slug][$eq]
+  })
+
+  const json = await strapiFetch<StrapiListResponse<Page>>(`/api/pages?${query}`)
   const item = json?.data?.[0]
-  return item ?? null
+  if (!item) return null
+  return normalizeEntry<Page>(item)
+}
+
+export async function getPageBannersBySlug(slug: string): Promise<unknown | null> {
+  const query = qs.stringify({
+    filters: {
+      slug: {
+        $eq: slug,
+      },
+    },
+    populate: {
+      banners: {
+        populate: {
+          image: {
+            populate: '*', // gets image metadata including URL
+          },
+          lockup: '*',
+          schedule: '*',
+        },
+      },
+    },
+  }, {
+    encodeValuesOnly: true,
+  })
+
+  const json = await strapiFetch<StrapiListResponse<{ banners: unknown[] }>>(`/api/pages?${query}`, { next: { revalidate: 60 } })
+  const page = json?.data?.[0]
+  if (!page?.banners) return null
+  return page.banners
 }

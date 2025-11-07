@@ -19,22 +19,25 @@
       "type": "uid",
       "targetField": "title"
     },
-    "published": {
-      "type": "boolean"
-    },
     "banners": {
       "type": "dynamiczone",
       "components": [
-        "content.hero",
-        "content.gallery",
+        "content.card",
         "content.card-list",
-        "content.section-header"
+        "content.section-header",
+        "content.gallery"
       ]
     },
     "seo": {
       "type": "component",
       "repeatable": false,
       "component": "seo.seo"
+    },
+    "block": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::block.block",
+      "inversedBy": "pages"
     }
   }
 }

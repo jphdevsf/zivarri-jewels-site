@@ -369,6 +369,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
+  collectionName: 'blocks';
+  info: {
+    description: '';
+    displayName: 'Block';
+    pluralName: 'blocks';
+    singularName: 'block';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.DynamicZone<
+      [
+        'content.section-header',
+        'content.gallery',
+        'content.card',
+        'content.card-list',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::block.block'> &
+      Schema.Attribute.Private;
+    pages: Schema.Attribute.Relation<'oneToMany', 'api::page.page'>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
   collectionName: 'global_settings';
   info: {
@@ -415,19 +450,19 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   attributes: {
     banners: Schema.Attribute.DynamicZone<
       [
-        'content.hero',
-        'content.gallery',
+        'content.card',
         'content.card-list',
         'content.section-header',
+        'content.gallery',
       ]
     >;
+    block: Schema.Attribute.Relation<'manyToOne', 'api::block.block'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
-    published: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
     slug: Schema.Attribute.UID<'title'>;
@@ -947,6 +982,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::block.block': ApiBlockBlock;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::page.page': ApiPagePage;
       'plugin::content-releases.release': PluginContentReleasesRelease;

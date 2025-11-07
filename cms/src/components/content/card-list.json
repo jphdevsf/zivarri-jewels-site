@@ -7,21 +7,26 @@
   },
   "options": {},
   "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "carousel_desktop": {
+      "type": "boolean",
+      "default": false
+    },
+    "carousel_mobile": {
+      "type": "boolean",
+      "default": false
+    },
     "cards": {
       "type": "component",
       "repeatable": true,
       "component": "content.card"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "primary",
-        "secondary",
-        "tertiary"
-      ]
-    },
-    "title": {
-      "type": "string"
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }

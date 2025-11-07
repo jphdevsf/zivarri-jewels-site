@@ -2,10 +2,16 @@
   "collectionName": "components_content_cards",
   "info": {
     "displayName": "card",
-    "icon": "picture"
+    "icon": "picture",
+    "description": ""
   },
   "options": {},
   "attributes": {
+    "hierarchy": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.hierarchy"
+    },
     "lockup": {
       "type": "component",
       "repeatable": false,
@@ -15,6 +21,11 @@
       "type": "component",
       "repeatable": false,
       "component": "element.image"
+    },
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }

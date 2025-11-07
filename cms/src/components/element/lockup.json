@@ -16,13 +16,7 @@
     "subtitle": {
       "type": "string"
     },
-    "badge": {
-      "type": "string"
-    },
     "price": {
-      "type": "string"
-    },
-    "legal": {
       "type": "string"
     },
     "links": {

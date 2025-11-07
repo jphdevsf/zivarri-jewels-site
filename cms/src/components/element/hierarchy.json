@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_element_hierarchies",
+  "info": {
+    "displayName": "Hierarchy",
+    "icon": "gate",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "tertiary"
+      ]
+    }
+  }
+}

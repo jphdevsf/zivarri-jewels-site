@@ -34,6 +34,19 @@ Customize values like database credentials, API URLs, and secrets.
 docker-compose build
 ```
 
+**Note**: When installing new packages (e.g., via `npm install` in `frontend/` or `cms/`), rebuild the affected Docker service to update the container's `node_modules`:
+
+```bash
+# For frontend changes
+docker-compose --profile dev build frontend-dev
+
+# For CMS changes
+docker-compose --profile dev build cms-dev
+
+# Then restart
+docker-compose --profile dev up
+```
+
 ## 🧪 Local Development
 
 Start the stack in development mode:
@@ -55,9 +68,20 @@ Start the stack in production mode:
 docker-compose --profile prod up -d
 ```
 
-This runs optimized builds with no hot reload and compiled assets.
+This runs optimized builds with no hot reload and compiled assets. Use `--profile prod` to activate production services.
 
 ## 🧰 Primary CLI Commands
+
+### Docker Compose (Monorepo)
+
+```bash
+docker-compose --profile dev up          # Start dev stack
+docker-compose --profile dev down        # Stop dev stack
+docker-compose --profile prod up -d      # Start prod stack (detached)
+docker-compose --profile prod down       # Stop prod stack
+docker-compose --profile dev build       # Build all dev services
+docker-compose --profile dev build frontend-dev  # Build specific service
+```
 
 ### Strapi (CMS)
 
@@ -77,6 +101,8 @@ npm run build         # Compile frontend
 npm run start         # Serve compiled frontend
 npm run start-dev     # Dev mode with NODE_ENV
 npm run start-prod    # Prod mode with NODE_ENV
+npm run lint          # Run ESLint
+npm run lint:fix      # Run ESLint with auto-fix
 ```
 
 ## 📁 Project Structure
@@ -112,3 +138,21 @@ Run this command to stop and remove any orphaned containers:
 ```bash
 docker-compose --profile dev down --remove-orphans
 ```
+
+### ❌ Module Not Found (e.g., 'qs' or other packages)
+If you see "Module not found" errors in the frontend container (e.g., after installing new packages), the container's `node_modules` is out of sync.
+
+### ✅ Fix: Rebuild the affected service
+
+```bash
+# Stop containers first
+docker-compose --profile dev down
+
+# Rebuild frontend (or cms-dev if CMS packages changed)
+docker-compose --profile dev build frontend-dev
+
+# Restart
+docker-compose --profile dev up
+```
+
+Always rebuild after adding/removing packages in `frontend/package.json` or `cms/package.json`.

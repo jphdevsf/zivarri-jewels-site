@@ -7,11 +7,15 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "string"
+    "lockup": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.lockup"
     },
-    "text": {
-      "type": "blocks"
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }

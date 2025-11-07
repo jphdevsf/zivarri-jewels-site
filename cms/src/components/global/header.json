@@ -2,7 +2,8 @@
   "collectionName": "components_global_headers",
   "info": {
     "displayName": "Header",
-    "icon": "layout"
+    "icon": "layout",
+    "description": ""
   },
   "options": {},
   "attributes": {

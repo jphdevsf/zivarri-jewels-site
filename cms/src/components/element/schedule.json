@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_element_schedules",
+  "info": {
+    "displayName": "schedule",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "date_start": {
+      "type": "datetime"
+    },
+    "date_end": {
+      "type": "datetime"
+    }
+  }
+}

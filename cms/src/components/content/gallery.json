@@ -11,13 +11,19 @@
       "type": "string"
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }
