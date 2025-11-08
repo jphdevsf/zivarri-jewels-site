@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
-import { generateMetadataFromCms } from '@/lib/seo/generateMetadataFromCms'
-import { getCmsData, type PageResponse } from '@/lib/strapi/client'
+import { generateMetadataFromCms } from '@/lib/cms/generateMetadataFromCms'
+import { getCmsData } from '@/lib/cms/getCmsData'
 import { draftMode } from 'next/headers'
+import type { PageResponse } from '@/types/CMSResponse'
 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

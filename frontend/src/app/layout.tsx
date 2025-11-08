@@ -1,8 +1,10 @@
 // import type { Metadata } from "next";
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { getCmsData, toAbsoluteStrapiUrl, type GlobalSettingResponse } from '@/lib/strapi/client'
+import { getCmsData } from '@/lib/cms/getCmsData'
+import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
 import Image from 'next/image'
+import type { GlobalSettingResponse } from '@/types/CMSResponse'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

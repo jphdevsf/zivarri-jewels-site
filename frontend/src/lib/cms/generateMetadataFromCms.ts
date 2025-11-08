@@ -1,27 +1,14 @@
 import type { Metadata } from 'next'
-import { getCmsData, toAbsoluteStrapiUrl, type SeoResponse } from '@/lib/strapi/client'
+import { getCmsData } from '@/lib/cms/getCmsData'
+import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
+import type { SeoResponse } from '@/types/CMSResponse'
 
-// Map Strapi SEO schemaType (Schema.org) to Next.js Open Graph type. Only 'Article' has a direct OG match; others default to 'website' for safety.
-const mapSchemaTypeToOg = (t?: string):
-  | 'website'
-  | 'article'
-  | 'profile'
-  | 'video.other' => {
-  switch (t) {
-    case 'Article':
-      return 'article'
-    case 'WebPage':
-    case 'Product':
-    case 'CollectionPage':
-    case 'Event':
-    case 'FAQPage':
-    case 'LocalBusiness':
-    default:
-      return 'website'
-  }
+const mapSchemaTypeToOgType = (schemaType?: string): 'website' | 'article' => {
+  if (schemaType === 'Article') return 'article'
+  return 'website'
 }
 
-export async function generateMetadataFromCms(slug: string, status: string): Promise<Metadata> {
+export const generateMetadataFromCms = async (slug: string, status: string): Promise<Metadata> => {
   const res = await getCmsData<SeoResponse>('pages', {
     filters: {
       slug: {
@@ -52,7 +39,7 @@ export async function generateMetadataFromCms(slug: string, status: string): Pro
       description: seo?.metaDescription || data.title,
       url: `https://yourdomain.com/${slug}`,
       images: imageUrl ? [{ url: imageUrl }] : [],
-      type: mapSchemaTypeToOg(seo?.schemaType),
+      type: mapSchemaTypeToOgType(seo?.schemaType),
     },
     twitter: {
       card: 'summary_large_image',

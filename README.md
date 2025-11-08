@@ -156,3 +156,32 @@ docker-compose --profile dev up
 ```
 
 Always rebuild after adding/removing packages in `frontend/package.json` or `cms/package.json`.
+
+### ❌ Container Name Conflict Error
+If you see an error like:
+```bash
+Error response from daemon: Conflict. The container name "/zivarri-jewels-site-strapi-dev-1" is already in use by container "2a82c368569d22089201a779c67ed84b8799ff970b907dd6bf608ef22e7e9c68". You have to remove (or rename) that container to be able to reuse that name.
+```
+This means a container from a previous run wasn't properly cleaned up and is still present.
+
+### ✅ Fix: Remove the conflicting container
+
+1. Stop and remove all containers:
+   ```bash
+   docker-compose down
+   ```
+
+2. Check for remaining containers:
+   ```bash
+   docker ps -a
+   ```
+
+3. Remove the specific conflicting container (replace with actual name if different):
+   ```bash
+   docker rm zivarri-jewels-site-strapi-dev-1
+   ```
+
+4. Restart the stack:
+   ```bash
+   docker-compose --profile dev up
+   ```
