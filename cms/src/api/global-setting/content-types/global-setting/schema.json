@@ -27,10 +27,10 @@
         "files"
       ]
     },
-    "header": {
+    "navigation": {
       "displayName": "Header",
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "global.header"
     }
   }

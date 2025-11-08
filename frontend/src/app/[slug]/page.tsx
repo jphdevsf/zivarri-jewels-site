@@ -1,20 +1,30 @@
 import { notFound } from 'next/navigation'
-import { BlocksRenderer } from '@strapi/blocks-react-renderer'
-import { generateMetadataFromStrapi } from '@/lib/seo/generateMetadataFromStrapi'
-import { getPageBySlug } from '@/lib/strapi/client'
+import { generateMetadataFromCms } from '@/lib/seo/generateMetadataFromCms'
+import { getCmsData, type PageResponse } from '@/lib/strapi/client'
+import { draftMode } from 'next/headers'
+
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  return await generateMetadataFromStrapi(slug)
+  const { isEnabled: isDraftMode } = await draftMode()
+  const status = isDraftMode ? 'draft' : 'published'
+  return await generateMetadataFromCms(slug, status)
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params }: { params: Promise<{ slug?: string }> }) {
   const { slug } = await params
-  const page = await getPageBySlug(slug)
+  const { isEnabled: isDraftMode } = await draftMode()
+  const status = isDraftMode ? 'draft' : 'published'
+  const res = await getCmsData<PageResponse>('pages', {
+    filters: { slug: { $eq: slug } },
+    populate: '*',
+    status
+  })
+  const page = (res.data as PageResponse[])?.[0]
   if (!page) return notFound()
   return (
     <main>
-      <BlocksRenderer content={page.text ?? []} />
+      <h1 className="text-4xl font-bold text-foreground mb-4">{page.title}</h1>
     </main>
   )
 }

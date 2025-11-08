@@ -420,7 +420,6 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    header: Schema.Attribute.Component<'global.header', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -428,6 +427,7 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images' | 'files'>;
+    navigation: Schema.Attribute.Component<'global.header', true>;
     publishedAt: Schema.Attribute.DateTime;
     siteName: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -454,6 +454,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'content.card-list',
         'content.section-header',
         'content.gallery',
+        'content.freeform-text',
       ]
     >;
     block: Schema.Attribute.Relation<'manyToOne', 'api::block.block'>;

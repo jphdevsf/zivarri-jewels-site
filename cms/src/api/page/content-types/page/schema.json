@@ -25,7 +25,8 @@
         "content.card",
         "content.card-list",
         "content.section-header",
-        "content.gallery"
+        "content.gallery",
+        "content.freeform-text"
       ]
     },
     "seo": {

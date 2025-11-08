@@ -33,6 +33,17 @@ export interface ContentCardList extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentFreeformText extends Struct.ComponentSchema {
+  collectionName: 'components_content_freeform_texts';
+  info: {
+    displayName: 'Freeform Text';
+    icon: 'layer';
+  };
+  attributes: {
+    text: Schema.Attribute.Blocks;
+  };
+}
+
 export interface ContentGallery extends Struct.ComponentSchema {
   collectionName: 'components_content_galleries';
   info: {
@@ -201,6 +212,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'content.card': ContentCard;
       'content.card-list': ContentCardList;
+      'content.freeform-text': ContentFreeformText;
       'content.gallery': ContentGallery;
       'content.section-header': ContentSectionHeader;
       'element.button': ElementButton;
