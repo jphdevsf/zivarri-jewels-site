@@ -10,7 +10,7 @@ const mapSchemaTypeToOgType = (schemaType?: string): 'website' | 'article' => {
 export const buildMetadata = (data: PageAndSeoResponse) => {
   const { slug } = data
   const seo = data.seo ?? undefined
-  const imageUrl = toAbsoluteStrapiUrl(seo?.seoImage?.formats?.small?.url || seo?.seoImage?.url)
+  const imageUrl = toAbsoluteStrapiUrl(seo?.seoImage?.url)
 
   return {
     title: seo?.metaTitle || data.title,

@@ -2,12 +2,18 @@
   "collectionName": "components_content_freeform_texts",
   "info": {
     "displayName": "Freeform Text",
-    "icon": "layer"
+    "icon": "layer",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "text": {
       "type": "blocks"
+    },
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }

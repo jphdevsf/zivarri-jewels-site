@@ -36,10 +36,12 @@ export interface ContentCardList extends Struct.ComponentSchema {
 export interface ContentFreeformText extends Struct.ComponentSchema {
   collectionName: 'components_content_freeform_texts';
   info: {
+    description: '';
     displayName: 'Freeform Text';
     icon: 'layer';
   };
   attributes: {
+    schedule: Schema.Attribute.Component<'element.schedule', false>;
     text: Schema.Attribute.Blocks;
   };
 }
