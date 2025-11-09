@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { getCmsData } from '@/lib/cms/getCmsData'
 import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
+import { getCmsMetadata } from '@/lib/cms/getCmsMetadata'
 import type { SeoResponse } from '@/types/CMSResponse'
 
 const mapSchemaTypeToOgType = (schemaType?: string): 'website' | 'article' => {
@@ -8,25 +8,18 @@ const mapSchemaTypeToOgType = (schemaType?: string): 'website' | 'article' => {
   return 'website'
 }
 
-export const generateMetadataFromCms = async (slug: string, status: string): Promise<Metadata> => {
-  const res = await getCmsData<SeoResponse>('pages', {
-    filters: {
-      slug: {
-        $eq: slug
-      }
-    },
-    populate: {
-      seo: {
-        populate: '*'
-      }
-    },
-    fields: ['title', 'slug'],
-    status: status
-  })
-  const data = (res.data as SeoResponse[])?.[0]
-  if (!data) return {}
+
+
+/**
+ * Builds Next.js Metadata object from CMS data
+ * @param data - Raw page data from Strapi
+ * @param slug - Page slug for URL construction
+ * @returns Next.js Metadata object
+ */
+const buildM = (data: SeoResponse, slug: string): Metadata => {
   const seo = data.seo ?? undefined
   const imageUrl = toAbsoluteStrapiUrl(seo?.seoImage?.formats?.small?.url || seo?.seoImage?.url)
+
   return {
     title: seo?.metaTitle || data.title,
     description: seo?.metaDescription || data.title,
@@ -48,4 +41,10 @@ export const generateMetadataFromCms = async (slug: string, status: string): Pro
       images: imageUrl ? [imageUrl] : [],
     },
   }
+}
+
+export const buildMetadata = async (slug: string, status: string): Promise<Metadata> => {
+  const data = await getCmsMetadata(slug, status)
+  if (!data) return {}
+  return buildM(data, slug)
 }

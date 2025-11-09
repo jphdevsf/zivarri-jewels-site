@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { generateMetadataFromCms } from '@/lib/cms/generateMetadataFromCms'
+import { buildMetadata } from '@/lib/cms/buildMetadata'
 import { getCmsData } from '@/lib/cms/getCmsData'
 import { draftMode } from 'next/headers'
 import type { PageResponse } from '@/types/CMSResponse'
@@ -7,7 +7,7 @@ import type { PageResponse } from '@/types/CMSResponse'
 export async function generateMetadata() {
   const { isEnabled: isDraftMode } = await draftMode()
   const status = isDraftMode ? 'draft' : 'published'
-  const test = await generateMetadataFromCms('home', status)
+  const test = await buildMetadata('home', status)
   return test
 }
 
