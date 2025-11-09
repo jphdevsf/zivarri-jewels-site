@@ -1,31 +1,16 @@
-import { notFound } from 'next/navigation'
 import { buildMetadata } from '@/lib/cms/buildMetadata'
-import { getCmsData } from '@/lib/cms/getCmsData'
-import { draftMode } from 'next/headers'
-import type { PageResponse } from '@/types/CMSResponse'
-
+import PageRenderer from '@/components/PageRenderer'
+import { getFullPageData } from '@/lib/cms/getPageAndSeoData'
+import type { PageAndSeoResponse } from '@/types/CMSResponse'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { isEnabled: isDraftMode } = await draftMode()
-  const status = isDraftMode ? 'draft' : 'published'
-  return await buildMetadata(slug, status)
+  const data = await getFullPageData(slug)
+  return buildMetadata(data as PageAndSeoResponse)
 }
 
-export default async function Page({ params }: { params: Promise<{ slug?: string }> }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { isEnabled: isDraftMode } = await draftMode()
-  const status = isDraftMode ? 'draft' : 'published'
-  const res = await getCmsData<PageResponse>('pages', {
-    filters: { slug: { $eq: slug } },
-    populate: '*',
-    status
-  })
-  const page = (res.data as PageResponse[])?.[0]
-  if (!page) return notFound()
-  return (
-    <main>
-      <h1 className="text-4xl font-bold text-foreground mb-4">{page.title}</h1>
-    </main>
-  )
+  const data = await getFullPageData(slug)
+  return <PageRenderer data={data as PageAndSeoResponse} />
 }

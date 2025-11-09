@@ -24,28 +24,12 @@ export type GlobalSettingResponse = {
     }
 };
 
-export type PageResponse = {
+export type PageAndSeoResponse = {
     id: number;
     documentId: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    title: string;
-    slug: string;
-};
-
-type SeoImage = {
-    url?: string
-    formats?: {
-        small?: {
-            url?: string
-        }
-    }
-}
-
-export type SeoResponse = {
-    id: number;
-    documentId: string;
     title: string;
     slug: string;
     seo?: {
@@ -57,6 +41,15 @@ export type SeoResponse = {
         seoImage?: SeoImage;
     }
 };
+
+type SeoImage = {
+    url?: string
+    formats?: {
+        small?: {
+            url?: string
+        }
+    }
+}
 
 export type CMSResponse<Data> = {
     data: Data | Data[]

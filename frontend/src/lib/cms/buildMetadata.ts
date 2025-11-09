@@ -1,22 +1,14 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
 import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
-import { getCmsMetadata } from '@/lib/cms/getCmsMetadata'
-import type { SeoResponse } from '@/types/CMSResponse'
+import type { PageAndSeoResponse } from '@/types/CMSResponse'
 
 const mapSchemaTypeToOgType = (schemaType?: string): 'website' | 'article' => {
   if (schemaType === 'Article') return 'article'
   return 'website'
 }
 
-
-
-/**
- * Builds Next.js Metadata object from CMS data
- * @param data - Raw page data from Strapi
- * @param slug - Page slug for URL construction
- * @returns Next.js Metadata object
- */
-const buildM = (data: SeoResponse, slug: string): Metadata => {
+export const buildMetadata = (data: PageAndSeoResponse) => {
+  const { slug } = data
   const seo = data.seo ?? undefined
   const imageUrl = toAbsoluteStrapiUrl(seo?.seoImage?.formats?.small?.url || seo?.seoImage?.url)
 
@@ -41,10 +33,4 @@ const buildM = (data: SeoResponse, slug: string): Metadata => {
       images: imageUrl ? [imageUrl] : [],
     },
   }
-}
-
-export const buildMetadata = async (slug: string, status: string): Promise<Metadata> => {
-  const data = await getCmsMetadata(slug, status)
-  if (!data) return {}
-  return buildM(data, slug)
 }
