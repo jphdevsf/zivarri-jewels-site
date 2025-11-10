@@ -22,6 +22,7 @@ export type GlobalSettingResponse = {
         width?: number;
         height?: number;
         url?: string;
+        mime?: string;
     }
 };
 

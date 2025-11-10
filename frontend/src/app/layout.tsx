@@ -1,18 +1,52 @@
 // import type { Metadata } from "next";
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Roboto } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { getCmsData } from '@/lib/cms/getCmsData'
 import Header from '@/components/Header'
 import type { GlobalSettingResponse } from '@/types/CMSResponse'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const roboto = Roboto({
+  variable: '--font-roboto',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '700', '900'],
+  style: ['normal', 'italic'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const walkwayExpand = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Walkway-Expand.woff2',
+      weight: '400',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-walkway-expand',
+  display: 'swap',
+})
+
+const walkwayExpandBlack = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Walkway-Expand-Black.woff2',
+      weight: '900',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-walkway-expand-black',
+  display: 'swap',
+})
+
+const walkwayBold = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Walkway-Expand-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-walkway-expand-bold',
+  display: 'swap',
 })
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
@@ -30,11 +64,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const globalSetting = res.data as GlobalSettingResponse
   const logo = globalSetting?.logo
   const navigation = globalSetting?.navigation
-
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${roboto.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} antialiased`}
       >
         <Header logo={logo} navigation={navigation} />
         {children}
