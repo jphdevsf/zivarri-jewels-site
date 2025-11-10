@@ -6,7 +6,6 @@ import { dynamicZoneQuery } from '@/lib/cms/config/queries'
 export const getFullPageData = async (slug: string): Promise<PageAndSeoResponse | null> => {
   const { isEnabled: isDraftMode } = await draftMode()
   const status = isDraftMode ? 'draft' : 'published'
-  console.log('JPH slug: ', slug)
   const res = await getCmsData<PageAndSeoResponse>('pages', {
     filters: {
       slug: {
@@ -29,6 +28,5 @@ export const getFullPageData = async (slug: string): Promise<PageAndSeoResponse 
     },
     status,
   })
-  console.log('jph: ', JSON.stringify(res, null, 2))
   return (res.data as PageAndSeoResponse[])?.[0] || null
 }

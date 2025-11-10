@@ -1,4 +1,5 @@
 import type { BlocksContent } from '@strapi/blocks-react-renderer'
+import type { Banner } from './content'
 
 export type GlobalSettingResponse = {
     id: number;
@@ -32,6 +33,7 @@ export type PageAndSeoResponse = {
     publishedAt: string;
     title: string;
     slug: string;
+    banners?: Banner[];
     seo?: {
         metaTitle?: string;
         metaDescription?: string;
