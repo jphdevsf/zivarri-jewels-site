@@ -1,36 +1,43 @@
 import { notFound } from 'next/navigation'
 import type { PageAndSeoResponse } from '@/types/CMSResponse'
-import Card from './ui/Card'
-import SectionHeader from './ui/SectionHeader'
-import FreeformText from './ui/FreeformText'
-import Gallery from './ui/Gallery'
-import CardList from './ui/CardList'
+import Card from './content/Card'
+import SectionHeader from './content/SectionHeader'
+import FreeformText from './content/FreeformText'
+import Gallery from './content/Gallery'
+import CardList from './content/CardList'
+import { CardBanner, SectionHeaderBanner, FreeformTextBanner, GalleryBanner, CardListBanner, type Banner } from '@/types/content'
+import React from 'react'
+
+interface componentMapType {
+  'content.card': React.ComponentType<CardBanner>;
+  'content.section-header': React.ComponentType<SectionHeaderBanner>;
+  'content.freeform-text': React.ComponentType<FreeformTextBanner>;
+  'content.gallery': React.ComponentType<GalleryBanner>;
+  'content.card-list': React.ComponentType<CardListBanner>;
+}
+
+const componentMap: componentMapType = {
+  'content.card': Card,
+  'content.section-header': SectionHeader,
+  'content.freeform-text': FreeformText,
+  'content.gallery': Gallery,
+  'content.card-list': CardList,
+}
 
 const PageRenderer = ({ data }: { data: PageAndSeoResponse }) => {
   if (!data) return notFound()
-
-  const renderBanner = (banner: unknown) => {
-    const bannerObj = banner as { id: number; __component: string;[key: string]: unknown }
-
-    if (bannerObj.__component === 'content.card') {
-      return <Card key={bannerObj.id} banner={bannerObj as any} />
-    } else if (bannerObj.__component === 'content.section-header') {
-      return <SectionHeader key={bannerObj.id} banner={bannerObj as any} />
-    } else if (bannerObj.__component === 'content.freeform-text') {
-      return <FreeformText key={bannerObj.id} banner={bannerObj as any} />
-    } else if (bannerObj.__component === 'content.gallery') {
-      return <Gallery key={bannerObj.id} banner={bannerObj as any} />
-    } else if (bannerObj.__component === 'content.card-list') {
-      return <CardList key={bannerObj.id} banner={bannerObj as any} />
-    } else {
-      return <div>Unknown component type: {bannerObj.__component}</div>
-    }
-  }
-
+  const { banners } = data
   return (
     <main>
       <h1 className="text-4xl font-bold text-foreground mb-4">{data.title}</h1>
-      {data.banners && data.banners.map((banner) => renderBanner(banner))}
+      {banners && banners.map((banner: Banner) => {
+        const key = banner.__component as keyof componentMapType
+        if (!(key in componentMap)) {
+          return <div key={banner.id}>Component not found: {banner.__component}</div>
+        }
+        const Component = componentMap[key] as React.ComponentType<any>
+        return React.createElement(Component, { key: banner.id, ...banner })
+      })}
     </main>
   )
 }

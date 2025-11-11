@@ -4,6 +4,8 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { getCmsData } from '@/lib/cms/getCmsData'
 import Header from '@/components/Header'
+import Logo from '@/components/Logo'
+import Navigation from '@/components/Navigation'
 import type { GlobalSettingResponse } from '@/types/CMSResponse'
 
 const roboto = Roboto({
@@ -69,7 +71,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body
         className={`${roboto.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} antialiased`}
       >
-        <Header logo={logo} navigation={navigation} />
+        <Header>
+          <Logo logo={logo} />
+          <Navigation navigation={navigation} />
+        </Header>
         {children}
       </body>
     </html>

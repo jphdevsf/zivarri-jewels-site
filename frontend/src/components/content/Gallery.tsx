@@ -1,12 +1,8 @@
 import type { GalleryBanner } from '@/types/content'
 
-const Gallery = ({ banner }: { banner: GalleryBanner }) => {
-  const { id, title, images } = banner
-
+const Gallery = ({ title, images }: GalleryBanner) => {
   return (
-    <div key={id}>
-      <p>Title: {title}</p>
-
+    <div>
       {/* {schedule && (
         <div>
           <h4>Schedule</h4>
@@ -14,7 +10,7 @@ const Gallery = ({ banner }: { banner: GalleryBanner }) => {
           <p>End: {schedule.date_end}</p>
         </div>
       )} */}
-
+      <p>Title: {title}</p>
       <div>
         <h4>Images</h4>
         {images.map((image) => (

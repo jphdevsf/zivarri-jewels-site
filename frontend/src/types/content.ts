@@ -9,7 +9,7 @@ export type Banner =
     | CardListBanner;
 
 export interface BaseBanner {
-    id: number;
+    id: number | string;
     __component: string;
 }
 

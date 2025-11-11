@@ -1,17 +1,15 @@
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import type { FreeformTextBanner } from '@/types/content'
 
-const FreeformText = ({ banner }: { banner: FreeformTextBanner }) => {
-  const { id, text } = banner
-
+const FreeformText = ({ text }: FreeformTextBanner) => {
   return (
-    <div key={id}>
-      <BlocksRenderer content={text} />
+    <div>
       {/* <div>
         <h4>Schedule</h4>
         <p>Start: {schedule.date_start}</p>
         <p>End: {schedule.date_end}</p>
       </div> */}
+      <BlocksRenderer content={text} />
     </div>
   )
 }

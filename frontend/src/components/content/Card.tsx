@@ -2,13 +2,9 @@ import type { CardBanner } from '@/types/content'
 import Lockup from './atomic/Lockup'
 import ImageData from './atomic/Image'
 
-const Card = ({ banner }: { banner: CardBanner }) => {
-  const { id, lockup, image } = banner
-
+const Card = ({ lockup, image }: CardBanner) => {
   return (
-    <div key={id}>
-      <Lockup lockup={lockup} />
-      <ImageData image={image} />
+    <div>
       {/* {schedule && (
         <div>
           <h4>Schedule</h4>
@@ -16,6 +12,8 @@ const Card = ({ banner }: { banner: CardBanner }) => {
           <p>End: {schedule.date_end}</p>
         </div>
       )} */}
+      <Lockup lockup={lockup} />
+      <ImageData image={image} />
     </div>
   )
 }

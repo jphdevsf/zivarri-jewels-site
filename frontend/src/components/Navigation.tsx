@@ -1,10 +1,6 @@
 import type { GlobalSettingResponse } from '@/types/CMSResponse'
 
-interface NavigationProps {
-  navigation?: GlobalSettingResponse['navigation']
-}
-
-export default function Navigation({ navigation }: NavigationProps) {
+const Navigation = ({ navigation }: { navigation?: GlobalSettingResponse['navigation'] }) => {
   return (
     <nav>
       <ul className="flex">
@@ -19,3 +15,5 @@ export default function Navigation({ navigation }: NavigationProps) {
     </nav>
   )
 }
+
+export default Navigation

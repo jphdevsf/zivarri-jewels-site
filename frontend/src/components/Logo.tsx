@@ -9,14 +9,13 @@ interface LogoProps {
 
 export default function Logo({ logo }: LogoProps) {
   if (!logo || !logo.url) return null
-  const url = toAbsoluteStrapiUrl(logo.url)!
-  console.log('logo >>>>>>>>>>>> ', logo)
 
+  const url = toAbsoluteStrapiUrl(logo.url)!
   const isSvg = logo.mime === 'image/svg+xml'
 
   return (
     <div className="logo-wrapper flex items-center gap-2">
-      <div className="logo-container white w-full max-w-[32px] aspect-square overflow-hidden">
+      <div className="logo-container white w-[32px] aspect-square overflow-hidden">
         {isSvg ? (
           <SvgLogo
             svgUrl={url}
