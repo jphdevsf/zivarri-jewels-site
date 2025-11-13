@@ -22,14 +22,22 @@
         "content.section-header",
         "content.gallery",
         "content.card",
-        "content.card-list"
+        "content.card-list",
+        "content.hero",
+        "content.freeform-text"
       ]
     },
     "pages": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::page.page",
-      "mappedBy": "block"
+      "mappedBy": "blocks"
+    },
+    "page_order": {
+      "type": "integer",
+      "default": 1,
+      "max": 100,
+      "min": 1
     }
   }
 }

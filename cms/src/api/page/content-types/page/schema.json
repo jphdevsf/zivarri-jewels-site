@@ -35,9 +35,9 @@
       "repeatable": false,
       "component": "seo.seo"
     },
-    "block": {
+    "blocks": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::block.block",
       "inversedBy": "pages"
     }

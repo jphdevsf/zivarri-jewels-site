@@ -387,6 +387,8 @@ export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
         'content.gallery',
         'content.card',
         'content.card-list',
+        'content.hero',
+        'content.freeform-text',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -395,7 +397,16 @@ export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::block.block'> &
       Schema.Attribute.Private;
-    pages: Schema.Attribute.Relation<'oneToMany', 'api::page.page'>;
+    page_order: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    pages: Schema.Attribute.Relation<'manyToMany', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
@@ -458,7 +469,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'content.hero',
       ]
     >;
-    block: Schema.Attribute.Relation<'manyToOne', 'api::block.block'>;
+    blocks: Schema.Attribute.Relation<'manyToMany', 'api::block.block'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
