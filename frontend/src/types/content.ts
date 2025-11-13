@@ -38,7 +38,7 @@ interface Lockup_align {
 }
 
 // Exported types
-export type Banner =
+export type BlockBanner =
   | HeroBanner
   | CardBanner
   | SectionHeaderBanner

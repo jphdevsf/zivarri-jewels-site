@@ -1,5 +1,5 @@
 import type { BlocksContent } from '@strapi/blocks-react-renderer'
-import type { Banner } from './content'
+import type { BlockBanner } from './content'
 
 export type GlobalSettingResponse = {
     id: number;
@@ -26,6 +26,22 @@ export type GlobalSettingResponse = {
     }
 };
 
+// Block collection type for reusable content blocks
+export type BlockResponse = {
+    id: number;
+    documentId: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    page_order?: number;
+    content: BlockBanner;
+    pages?: Array<{
+        id: number;
+        slug: string;
+    }>;
+};
+
 export type PageAndSeoResponse = {
     id: number;
     documentId: string;
@@ -34,7 +50,6 @@ export type PageAndSeoResponse = {
     publishedAt: string;
     title: string;
     slug: string;
-    banners?: Banner[];
     seo?: {
         metaTitle?: string;
         metaDescription?: string;

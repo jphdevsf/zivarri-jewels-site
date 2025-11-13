@@ -6,39 +6,35 @@ import SectionHeader from './content/SectionHeader'
 import FreeformText from './content/FreeformText'
 import Gallery from './content/Gallery'
 import CardList from './content/CardList'
-import { CardBanner, HeroBanner, SectionHeaderBanner, FreeformTextBanner, GalleryBanner, CardListBanner, type Banner } from '@/types/content'
+import type { BlockBanner } from '@/types/content'
 import React from 'react'
 
-interface componentMapType {
-  'content.hero': React.ComponentType<HeroBanner>;
-  'content.card': React.ComponentType<CardBanner>;
-  'content.section-header': React.ComponentType<SectionHeaderBanner>;
-  'content.freeform-text': React.ComponentType<FreeformTextBanner>;
-  'content.gallery': React.ComponentType<GalleryBanner>;
-  'content.card-list': React.ComponentType<CardListBanner>;
-}
-
-const componentMap: componentMapType = {
+const componentMap = {
   'content.hero': Hero,
   'content.card': Card,
   'content.section-header': SectionHeader,
   'content.freeform-text': FreeformText,
   'content.gallery': Gallery,
   'content.card-list': CardList,
+} as const
+
+interface PageRendererProps {
+  data: PageAndSeoResponse;
+  blocks: BlockBanner[]; // Required blocks prop for reusable content
 }
 
-const PageRenderer = ({ data }: { data: PageAndSeoResponse }) => {
+const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   if (!data) return notFound()
-  const { banners } = data
+
   return (
     <main className='w-full max-w-7xl block relative mx-auto my-8 flex flex-col gap-12 px-4'>
       <h1 className="sr-only">{data.title}</h1>
-      {banners && banners.map((banner: Banner) => {
-        const key = banner.__component as keyof componentMapType
+      {blocks && blocks.map((banner: BlockBanner) => {
+        const key = banner.__component as keyof typeof componentMap
         if (!(key in componentMap)) {
           return <div key={banner.id}>Component not found: {banner.__component}</div>
         }
-        const Component = componentMap[key] as React.ComponentType<any>
+        const Component = componentMap[key] as React.ComponentType<unknown>
         return React.createElement(Component, { key: banner.id, ...banner })
       })}
     </main>

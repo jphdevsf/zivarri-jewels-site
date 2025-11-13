@@ -46,7 +46,6 @@ const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
   if (lockup_align.y_axis === 'top') alignClasses += 'justify-start '
   if (lockup_align.y_axis === 'center') alignClasses += 'justify-center '
   if (lockup_align.y_axis === 'bottom') alignClasses += 'justify-end '
-  console.log('JPH24: ', width)
   const widthClass = grid12[width - 1] || 'w-12/12'
   return (
     <div className='content-hero relative block bg-white'>
