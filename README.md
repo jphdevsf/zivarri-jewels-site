@@ -1,6 +1,6 @@
 # 🛠 Zivarri Jewels Site — Monorepo Stack
 
-This repo is a full-stack website and monorepo powered by Next.js, Strapi, and PostgreSQL, containerized with Docker and orchestrated via Docker Compose. This site is still under development and we're in the content modeling phase (we as in me, myself, and AI).
+This repo is a full-stack jewelry website and monorepo powered by Next.js, Strapi, and PostgreSQL, containerized with Docker and orchestrated via Docker Compose. The project features a comprehensive component architecture with 14 React components, dynamic content management through Strapi CMS, and advanced styling with Tailwind CSS and CSS modules.
 
 ## 📦 Stack Overview
 
@@ -109,18 +109,51 @@ npm run lint:fix      # Run ESLint with auto-fix
 
 ```text
 zivarri-jewels-site/
-├── cms/               # Strapi backend
-├── frontend/          # Next.js frontend
-├── docker-compose.yml # Compose orchestration
+├── cms/                           # Strapi backend
+│   ├── src/
+│   │   ├── api/                   # Content API routes
+│   │   ├── components/            # Strapi components
+│   │   ├── extensions/            # Custom extensions
+│   │   └── admin/                 # Admin panel
+│   └── database/                  # Database migrations
+├── frontend/                      # Next.js frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── content/           # Content components (7)
+│   │   │   │   ├── Hero.tsx       # Hero banners with positioning
+│   │   │   │   ├── Card.tsx       # Individual content cards
+│   │   │   │   ├── CardList.tsx   # Card collections
+│   │   │   │   ├── SectionHeader.tsx
+│   │   │   │   ├── FreeformText.tsx
+│   │   │   │   └── Gallery.tsx    # Image galleries
+│   │   │   ├── atomic/            # Reusable components (3)
+│   │   │   │   ├── Lockup.tsx     # Text content with em scaling
+│   │   │   │   ├── Image.tsx      # Responsive images
+│   │   │   │   └── Link.tsx       # Links with hover effects
+│   │   │   └── layout/            # Layout components (4)
+│   │   │       ├── Header.tsx     # Site header
+│   │   │       ├── Logo.tsx       # Branding
+│   │   │       ├── Navigation.tsx # Menu system
+│   │   │       └── SvgLogo.tsx    # Vector logo
+│   │   ├── lib/                   # Utilities and config
+│   │   └── types/                 # TypeScript definitions
+│   └── public/                    # Static assets
+└── docker-compose.yml             # Container orchestration
 ```
 
-## ✅ What’s Working
+## ✅ What's Working
 
-- Dockerized monorepo with isolated services
-- Native module compatibility across macOS and Linux
-- Compose profiles for dev/prod switching
-- Persistent PostgreSQL volume
-- .dockerignore optimization for fast builds
+- **Complete Component Architecture**: 14 React components with TypeScript
+  - 7 content components (Hero, Card, CardList, SectionHeader, FreeformText, Gallery, PageRenderer)
+  - 3 atomic components (Lockup, Image, Link) for reusability
+  - 4 layout components (Header, Logo, Navigation, SvgLogo)
+- **Advanced Styling System**: Tailwind CSS + CSS modules with em-based typography scaling
+- **Dynamic Content Management**: Strapi CMS with dynamic zones and flexible content types
+- **Hero Component Features**: Dynamic positioning, CSS modules, hover effects, responsive design
+- **Dockerized Monorepo**: Isolated services with dev/prod profiles
+- **TypeScript Integration**: Full type safety across frontend and CMS
+- **Component Relationships**: Mapped dependencies and usage patterns
+- **Responsive Design**: Mobile-first approach with Tailwind utilities
 
 ## 🧯 Troubleshooting
 
@@ -186,23 +219,64 @@ This means a container from a previous run wasn't properly cleaned up and is sti
    docker-compose --profile dev up
    ```
 
+## 🏗️ Component Architecture
+
+The frontend uses a hierarchical component structure designed for reusability and maintainability:
+
+### **Content Components** (Dynamic Zone Integration)
+- **PageRenderer**: Central hub that maps Strapi dynamic zones to React components
+- **Hero**: Banner component with dynamic positioning and CSS modules
+- **Card**: Individual content cards using Lockup and Image components
+- **CardList**: Container for multiple Card components with carousel support
+- **SectionHeader**: Typography component for section introductions
+- **FreeformText**: Flexible text content display
+- **Gallery**: Image collection display
+
+### **Atomic Components** (Reusable Building Blocks)
+- **Lockup**: Text content with em-based typography scaling (1em parent, 1.75em title, 1.25em price, 1em subtitle, 0.8em lead-in)
+- **Image**: Responsive image rendering with desktop/mobile variants
+- **Link**: Interactive links with hover effects and animations
+
+### **Layout Components** (Site Structure)
+- **Header**: Main navigation container
+- **Logo/SvgLogo**: Branding components
+- **Navigation**: Menu and routing system
+
+### **Component Relationships**
+```
+PageRenderer (central hub)
+├── Hero → { Lockup, Image }
+├── Card → { Lockup, Image }
+├── CardList → { Card → { Lockup, Image } }
+├── SectionHeader
+├── FreeformText
+└── Gallery
+
+Header → { Logo, Navigation, SvgLogo }
+```
+
+### **Styling Approach**
+- **Tailwind CSS**: Layout, positioning, responsive utilities
+- **CSS Modules**: Typography with em-based scaling for consistent hierarchy
+- **Component Composition**: Atomic components reused across content components
+
 ## 🧩 Adding New Strapi Components
 
-When adding new components to Strapi (especially for dynamic zones), follow these steps to ensure they appear correctly in the frontend:
+When adding new components to Strapi (especially for dynamic zones), follow these comprehensive steps to ensure they appear correctly in the frontend:
 
-### In Strapi...
-#### 1. Create Component in Strapi CMS
+### **Step 1: Create Component in Strapi CMS**
 
 1. Navigate to **Strapi Admin** → **Content-Type Builder** → **Components**
-2. Create your new component (e.g., `content.hero`)
+2. Create your new component (e.g., `content.testimonial`)
 3. Define the component's fields and structure
+4. Ensure component follows naming convention: `content.component-name`
 
-#### 2. Add Component to Dynamic Zone
+### **Step 2: Add Component to Dynamic Zone**
 
 1. Go to the content type that uses dynamic zones (e.g., **Page** collection type)
 2. Edit the dynamic zone field (e.g., `banners`)
 3. Add your new component to the available components list
-4. Save and restart the CMS container if needed
+4. Save changes and publish
 
 ### In Repo Codebase...
 #### 3. Update Frontend Query Configuration

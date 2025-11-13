@@ -16,7 +16,6 @@
         "source.fixAll.eslint": "explicit"
     },
     "editor.formatOnSave": true,
-    // Show ESLint issues as you type
     "editor.codeActionsOnSaveMode": "allChanges",
     "eslint.alwaysShowStatus": true,
     "eslint.probe": [
@@ -26,5 +25,11 @@
         "typescriptreact"
     ],
     "git.ignoreLimitWarning": true,
-    "chat.mcp.serverSampling": {}
+    "chat.mcp.serverSampling": {
+        "zivarri-jewels-site/.vscode/mcp.json: github": {
+            "allowedModels": [
+                "openrouter/minimax/minimax-m2"
+            ]
+        }
+    }
 }
