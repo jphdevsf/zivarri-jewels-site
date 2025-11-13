@@ -3,7 +3,7 @@ import type { FreeformTextBanner } from '@/types/content'
 
 const FreeformText = ({ text }: FreeformTextBanner) => {
   return (
-    <div>
+    <div className="content-freeform-text">
       {/* <div>
         <h4>Schedule</h4>
         <p>Start: {schedule.date_start}</p>

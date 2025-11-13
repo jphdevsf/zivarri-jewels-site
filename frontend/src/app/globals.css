@@ -6,11 +6,12 @@
 }
 
 @theme inline {
-  --font-main: var(--font-roboto);
-  --font-heading: var(--font-walkway-expand-bold);
-  --font-heading-bold: var(--font-walkway-expand-black);
-  --font-walkway: var(--font-walkway-expand-bold);
-  --font-walkway-bold: var(--font-walkway-expand-black);
+  --font-main: var(--font-eau_sans_book_lng);
+  --font-heading: var(--font-eb_garamond);
+  --font-heading-bold: var(--font-eb_garamond);
+  --font-eau: var(--font-eau_sans_book_lng);
+  --font-eau-bold: var(--font-eau_sans_bold_lng);
+  --font-eau-black: var(--font-eau_sans_black_lng);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,7 +24,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-roboto), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-eau_sans_book_lng), system-ui, -apple-system, sans-serif;
 }
 
 /* Heading elements use Walkway-Expand-Bold */
@@ -33,6 +34,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-walkway-bold), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-eb_garamond), system-ui, -apple-system, sans-serif;
   font-weight: 700;
 }

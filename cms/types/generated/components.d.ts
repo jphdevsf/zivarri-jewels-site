@@ -8,7 +8,6 @@ export interface ContentCard extends Struct.ComponentSchema {
     icon: 'picture';
   };
   attributes: {
-    hierarchy: Schema.Attribute.Component<'element.hierarchy', false>;
     image: Schema.Attribute.Component<'element.image', false>;
     lockup: Schema.Attribute.Component<'element.lockup', false>;
     schedule: Schema.Attribute.Component<'element.schedule', false>;
@@ -60,6 +59,21 @@ export interface ContentGallery extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentHero extends Struct.ComponentSchema {
+  collectionName: 'components_content_heroes';
+  info: {
+    description: '';
+    displayName: 'Hero';
+    icon: 'picture';
+  };
+  attributes: {
+    image: Schema.Attribute.Component<'element.image', false>;
+    lockup: Schema.Attribute.Component<'element.lockup', false>;
+    lockup_align: Schema.Attribute.Component<'element.alignment', false>;
+    schedule: Schema.Attribute.Component<'element.schedule', false>;
+  };
+}
+
 export interface ContentSectionHeader extends Struct.ComponentSchema {
   collectionName: 'components_content_section_headers';
   info: {
@@ -70,6 +84,53 @@ export interface ContentSectionHeader extends Struct.ComponentSchema {
   attributes: {
     lockup: Schema.Attribute.Component<'element.lockup', false>;
     schedule: Schema.Attribute.Component<'element.schedule', false>;
+  };
+}
+
+export interface ElementAlignment extends Struct.ComponentSchema {
+  collectionName: 'components_element_alignments';
+  info: {
+    description: '';
+    displayName: 'lockup_align';
+    icon: 'filter';
+  };
+  attributes: {
+    offset_bottom: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    offset_left: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    offset_right: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    offset_top: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    x_axis: Schema.Attribute.Enumeration<['center', 'left', 'right']> &
+      Schema.Attribute.DefaultTo<'center'>;
+    y_axis: Schema.Attribute.Enumeration<['center', 'top', 'bottom']> &
+      Schema.Attribute.DefaultTo<'center'>;
   };
 }
 
@@ -143,7 +204,17 @@ export interface ElementLockup extends Struct.ComponentSchema {
     links: Schema.Attribute.Component<'element.link', true>;
     price: Schema.Attribute.String;
     subtitle: Schema.Attribute.String;
+    text_align: Schema.Attribute.Enumeration<['center', 'left', 'right']> &
+      Schema.Attribute.DefaultTo<'center'>;
     title: Schema.Attribute.String;
+    width: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
   };
 }
 
@@ -216,7 +287,9 @@ declare module '@strapi/strapi' {
       'content.card-list': ContentCardList;
       'content.freeform-text': ContentFreeformText;
       'content.gallery': ContentGallery;
+      'content.hero': ContentHero;
       'content.section-header': ContentSectionHeader;
+      'element.alignment': ElementAlignment;
       'element.button': ElementButton;
       'element.hierarchy': ElementHierarchy;
       'element.image': ElementImage;

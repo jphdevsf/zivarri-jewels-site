@@ -1,21 +1,26 @@
 {
-  "collectionName": "components_content_cards",
+  "collectionName": "components_content_heroes",
   "info": {
-    "displayName": "card",
+    "displayName": "Hero",
     "icon": "picture",
     "description": ""
   },
   "options": {},
   "attributes": {
+    "image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.image"
+    },
     "lockup": {
       "type": "component",
       "repeatable": false,
       "component": "element.lockup"
     },
-    "image": {
+    "lockup_align": {
       "type": "component",
       "repeatable": false,
-      "component": "element.image"
+      "component": "element.alignment"
     },
     "schedule": {
       "type": "component",

@@ -455,6 +455,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'content.section-header',
         'content.gallery',
         'content.freeform-text',
+        'content.hero',
       ]
     >;
     block: Schema.Attribute.Relation<'manyToOne', 'api::block.block'>;

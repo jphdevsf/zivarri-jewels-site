@@ -2,6 +2,10 @@ const dZLockup = {
   populate: '*'
 }
 
+const dZLockupAlign = {
+  populate: '*'
+}
+
 const dZImage = {
   populate: {
     desktop: {
@@ -24,8 +28,8 @@ export const dynamicZoneQuery = {
       cards: {
         populate: {
           lockup: dZLockup,
+          image: dZImage,
           schedule: dZSchedule,
-          image: dZImage
         }
       }
     }
@@ -33,8 +37,16 @@ export const dynamicZoneQuery = {
   'content.card': {
     populate: {
       lockup: dZLockup,
+      image: dZImage,
       schedule: dZSchedule,
-      image: dZImage
+    }
+  },
+  'content.hero': {
+    populate: {
+      lockup: dZLockup,
+      image: dZImage,
+      schedule: dZSchedule,
+      lockup_align: dZLockupAlign
     }
   },
   'content.section-header': {

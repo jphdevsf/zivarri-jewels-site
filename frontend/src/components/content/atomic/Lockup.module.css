@@ -1,0 +1,45 @@
+.lockup {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+.leadin {
+    font-size: 0.8em;
+    /* display: block;
+    margin-top: 0.25em;
+    color: #6b7280;
+    font-weight: 400;
+    letter-spacing: 0.025em; */
+}
+
+.title {
+    font-size: 1.75em;
+    /* display: block;
+    margin-top: 0.25em;
+    color: #111827;
+    font-weight: 600;
+    line-height: 1.2; */
+}
+
+.subtitle {
+    font-size: 1em;
+    /* display: block;
+    margin-top: 0.25em;
+    color: #6b7280;
+    font-weight: 400;
+    line-height: 1.5; */
+}
+
+.price {
+    font-size: 1.25em;
+    /* display: block;
+    margin-top: 0.5em;
+    color: #111827;
+    font-weight: 500; */
+}
+
+.links {
+    /* margin: 0 auto;
+    width: 91.666667%;
+    margin-top: 1rem; */
+}

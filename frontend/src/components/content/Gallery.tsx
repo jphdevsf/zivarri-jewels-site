@@ -2,7 +2,7 @@ import type { GalleryBanner } from '@/types/content'
 
 const Gallery = ({ title, images }: GalleryBanner) => {
   return (
-    <div>
+    <div className='content-gallery'>
       {/* {schedule && (
         <div>
           <h4>Schedule</h4>

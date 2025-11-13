@@ -23,6 +23,20 @@
       "type": "component",
       "repeatable": true,
       "component": "element.link"
+    },
+    "text_align": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "left",
+        "right"
+      ],
+      "default": "center"
+    },
+    "width": {
+      "type": "integer",
+      "default": 12,
+      "max": 12
     }
   }
 }

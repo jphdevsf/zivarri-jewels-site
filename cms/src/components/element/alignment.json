@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_element_alignments",
+  "info": {
+    "displayName": "lockup_align",
+    "icon": "filter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "x_axis": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "left",
+        "right"
+      ],
+      "default": "center"
+    },
+    "y_axis": {
+      "type": "enumeration",
+      "enum": [
+        "center",
+        "top",
+        "bottom"
+      ],
+      "default": "center"
+    },
+    "offset_top": {
+      "type": "integer",
+      "default": 0,
+      "max": 25
+    },
+    "offset_right": {
+      "type": "integer",
+      "default": 0,
+      "max": 25
+    },
+    "offset_bottom": {
+      "type": "integer",
+      "default": 0,
+      "max": 25
+    },
+    "offset_left": {
+      "type": "integer",
+      "default": 0,
+      "max": 25
+    }
+  }
+}

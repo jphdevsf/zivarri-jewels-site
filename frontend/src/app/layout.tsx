@@ -1,5 +1,5 @@
 // import type { Metadata } from "next";
-import { Roboto } from 'next/font/google'
+import { Roboto, EB_Garamond } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 import { getCmsData } from '@/lib/cms/getCmsData'
@@ -12,6 +12,13 @@ const roboto = Roboto({
   variable: '--font-roboto',
   subsets: ['latin'],
   weight: ['300', '400', '500', '700', '900'],
+  style: ['normal', 'italic'],
+})
+
+const eb_garamond = EB_Garamond({
+  variable: '--font-eb_garamond',
+  subsets: ['latin'],
+  weight: ['400', '600'],
   style: ['normal', 'italic'],
 })
 
@@ -51,6 +58,42 @@ const walkwayBold = localFont({
   display: 'swap',
 })
 
+const EauBook = localFont({
+  src: [
+    {
+      path: '../../public/fonts/eau_sans_book_lng.woff2',
+      weight: '400',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-eau_sans_book_lng',
+  display: 'swap',
+})
+
+const EauBold = localFont({
+  src: [
+    {
+      path: '../../public/fonts/eau_sans_bold_lng.woff2',
+      weight: '600',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-eau_sans_bold_lng',
+  display: 'swap',
+})
+
+const EauBlack = localFont({
+  src: [
+    {
+      path: '../../public/fonts/eau_sans_black_lng.woff2',
+      weight: '700',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-eau_sans_black_lng',
+  display: 'swap',
+})
+
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 
   const res = await getCmsData<GlobalSettingResponse>('global-setting', {
@@ -69,7 +112,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} antialiased`}
+        className={`${roboto.variable} ${eb_garamond.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} ${EauBook.variable} ${EauBold.variable} ${EauBlack.variable} antialiased`}
       >
         <Header>
           <Logo logo={logo} />

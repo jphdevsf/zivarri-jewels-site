@@ -3,7 +3,7 @@ import Lockup from './atomic/Lockup'
 
 const SectionHeader = ({ lockup }: SectionHeaderBanner) => {
   return (
-    <div>
+    <div className='content-section-header'>
       {/* <div>
         <h4>Schedule</h4>
         <p>Start: {schedule.date_start}</p>

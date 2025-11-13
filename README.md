@@ -185,3 +185,155 @@ This means a container from a previous run wasn't properly cleaned up and is sti
    ```bash
    docker-compose --profile dev up
    ```
+
+## 🧩 Adding New Strapi Components
+
+When adding new components to Strapi (especially for dynamic zones), follow these steps to ensure they appear correctly in the frontend:
+
+### In Strapi...
+#### 1. Create Component in Strapi CMS
+
+1. Navigate to **Strapi Admin** → **Content-Type Builder** → **Components**
+2. Create your new component (e.g., `content.hero`)
+3. Define the component's fields and structure
+
+#### 2. Add Component to Dynamic Zone
+
+1. Go to the content type that uses dynamic zones (e.g., **Page** collection type)
+2. Edit the dynamic zone field (e.g., `banners`)
+3. Add your new component to the available components list
+4. Save and restart the CMS container if needed
+
+### In Repo Codebase...
+#### 3. Update Frontend Query Configuration
+
+**Critical**: Update `frontend/src/lib/cms/config/queries.ts` to include your new component in the `dynamicZoneQuery` object:
+
+```typescript
+export const dynamicZoneQuery = {
+  // ... existing components
+  'content.your-new-component': {
+    fields: ['field1', 'field2'], // Specify fields to fetch
+    populate: {
+      nestedComponent: dZLockup, // Reuse existing populate configs
+      image: dZImage
+    }
+  },
+}
+```
+
+**Why this is needed**: Strapi only returns data for components explicitly defined in your query configuration. Without this step, your component data won't appear in API responses even if it's saved in the CMS.
+
+#### 4. Add Component to PageRenderer
+
+Update `frontend/src/components/PageRenderer.tsx`:
+
+1. Import your component:
+   ```typescript
+   import YourComponent from './content/YourComponent'
+   ```
+
+2. Add to the component map:
+   ```typescript
+   const componentMap = {
+     // ... existing components
+     'content.your-new-component': YourComponent,
+   }
+   ```
+
+3. Add the TypeScript type:
+   ```typescript
+   import { YourComponentBanner, type Banner } from '@/types/content'
+   
+   interface componentMapType {
+     // ... existing types
+     'content.your-new-component': React.ComponentType<YourComponentBanner>;
+   }
+   ```
+
+#### 5. Create TypeScript Types (if needed)
+
+Add type definitions to `frontend/src/types/content.ts`:
+
+```typescript
+export interface YourComponentBanner extends Banner {
+  __component: 'content.your-new-component';
+  // Add your component's fields here
+  title: string;
+  subtitle?: string;
+  // ... other fields
+}
+```
+
+#### 6. Create React Component
+
+Create the actual component file at `frontend/src/components/content/YourComponent.tsx`:
+
+```typescriptin
+import React from 'react'
+import type { YourComponentBanner } from '@/types/content'
+
+interface YourComponentProps extends YourComponentBanner {}
+
+const YourComponent: React.FC<YourComponentProps> = (props) => {
+  const { title, subtitle } = props
+  
+  return (
+    <div className="your-component-styles">
+      <h2>{title}</h2>
+      {subtitle && <p>{subtitle}</p>}
+      {/* Render your component content */}
+    </div>
+  )
+}
+
+export default YourComponent
+```
+
+### 7. Test the Integration
+
+1. **In Strapi**: Create content using your new component and publish it
+2. **In Frontend**: Check the browser console for the component data in the `banners` array
+3. **Verify**: The component should render correctly on the frontend
+
+### Quick Reference: Component Naming
+
+- **Strapi Component Name**: `content.hero` (used in `__component` field)
+- **File System**: `Hero.tsx` (PascalCase)
+- **TypeScript Interface**: `HeroBanner` (ComponentName + Banner)
+- **Query Key**: `'content.hero'` (matches `__component` value)
+
+### Common Issues
+
+- **Component not appearing**: Missing entry in `dynamicZoneQuery`
+- **TypeScript errors**: Missing type definitions or component not imported
+- **Data not showing**: Component not added to dynamic zone in Strapi content type
+- **Styling issues**: Component not matching expected CSS classes
+
+### Example: Adding a "Testimonial" Component
+
+```typescript
+// 1. In queries.ts
+'testimonial': {
+  fields: ['quote', 'author_name', 'author_title'],
+  populate: {
+    author_image: dZImage
+  }
+}
+
+// 2. In PageRenderer.tsx
+import Testimonial from './content/Testimonial'
+const componentMap = {
+  // ... existing
+  'content.testimonial': Testimonial,
+}
+
+// 3. In types/content.ts
+export interface TestimonialBanner extends Banner {
+  __component: 'content.testimonial';
+  quote: string;
+  author_name: string;
+  author_title?: string;
+  author_image: ImageData;
+}
+```

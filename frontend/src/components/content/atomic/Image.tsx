@@ -22,28 +22,30 @@ const ImageData = ({ image }: { image: ResponsiveImageData }) => {
     const responsiveImage = image as ResponsiveImageData
     const { desktop, mobile, altText } = responsiveImage
     return (
-      <picture>
-        <source
-          media="(min-width: 768px)"
-          srcSet={toAbsoluteStrapiUrl(desktop.url)!}
-          width={desktop.width}
-          height={desktop.height}
-        />
-        <source
-          media="(max-width: 767px)"
-          srcSet={toAbsoluteStrapiUrl(mobile.url)!}
-          width={mobile.width}
-          height={mobile.height}
-        />
-        <Image
-          src={toAbsoluteStrapiUrl(desktop.url)!}
-          alt={altText}
-          width={desktop.width}
-          height={desktop.height}
-          priority={false}
-          unoptimized={true}
-        />
-      </picture>
+      <div className="content-image">
+        <picture>
+          <source
+            media="(min-width: 768px)"
+            srcSet={toAbsoluteStrapiUrl(desktop.url)!}
+            width={desktop.width}
+            height={desktop.height}
+          />
+          <source
+            media="(max-width: 767px)"
+            srcSet={toAbsoluteStrapiUrl(mobile.url)!}
+            width={mobile.width}
+            height={mobile.height}
+          />
+          <Image
+            src={toAbsoluteStrapiUrl(desktop.url)!}
+            alt={altText}
+            width={desktop.width}
+            height={desktop.height}
+            priority={false}
+            unoptimized={true}
+          />
+        </picture>
+      </div >
     )
   }
 }
