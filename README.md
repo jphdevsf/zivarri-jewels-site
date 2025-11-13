@@ -148,7 +148,7 @@ zivarri-jewels-site/
   - 3 atomic components (Lockup, Image, Link) for reusability
   - 4 layout components (Header, Logo, Navigation, SvgLogo)
 - **Advanced Styling System**: Tailwind CSS + CSS modules with em-based typography scaling
-- **Dynamic Content Management**: Strapi CMS with dynamic zones and flexible content types
+- **Dynamic Content Management**: Strapi CMS with reusable blocks and flexible content types
 - **Hero Component Features**: Dynamic positioning, CSS modules, hover effects, responsive design
 - **Dockerized Monorepo**: Isolated services with dev/prod profiles
 - **TypeScript Integration**: Full type safety across frontend and CMS
@@ -223,8 +223,8 @@ This means a container from a previous run wasn't properly cleaned up and is sti
 
 The frontend uses a hierarchical component structure designed for reusability and maintainability:
 
-### **Content Components** (Dynamic Zone Integration)
-- **PageRenderer**: Central hub that maps Strapi dynamic zones to React components
+### **Content Components** (Blocks Architecture)
+- **PageRenderer**: Central hub that maps Strapi blocks to React components
 - **Hero**: Banner component with dynamic positioning and CSS modules
 - **Card**: Individual content cards using Lockup and Image components
 - **CardList**: Container for multiple Card components with carousel support
@@ -271,11 +271,11 @@ When adding new components to Strapi (especially for dynamic zones), follow thes
 3. Define the component's fields and structure
 4. Ensure component follows naming convention: `content.component-name`
 
-### **Step 2: Add Component to Dynamic Zone**
+### **Step 2: Add Component to Blocks Collection**
 
-1. Go to the content type that uses dynamic zones (e.g., **Page** collection type)
-2. Edit the dynamic zone field (e.g., `banners`)
-3. Add your new component to the available components list
+1. Go to the **Blocks** collection type in Strapi
+2. Create a new block entry with your new component in the `content` field
+3. Assign the block to relevant pages using the `pages` relation field
 4. Save changes and publish
 
 ### In Repo Codebase...
@@ -296,7 +296,7 @@ export const dynamicZoneQuery = {
 }
 ```
 
-**Why this is needed**: Strapi only returns data for components explicitly defined in your query configuration. Without this step, your component data won't appear in API responses even if it's saved in the CMS.
+**Why this is needed**: Strapi only returns data for components explicitly defined in your query configuration. Without this step, your component data won't appear in API responses even if it's saved in the CMS blocks.
 
 #### 4. Add Component to PageRenderer
 
@@ -339,6 +339,8 @@ export interface YourComponentBanner extends Banner {
 }
 ```
 
+The Banner type includes all dynamic zone components that can appear in blocks.
+
 #### 6. Create React Component
 
 Create the actual component file at `frontend/src/components/content/YourComponent.tsx`:
@@ -379,10 +381,11 @@ export default YourComponent
 
 ### Common Issues
 
-- **Component not appearing**: Missing entry in `dynamicZoneQuery`
+- **Component not appearing**: Missing entry in `dynamicZoneQuery` or block not assigned to page
 - **TypeScript errors**: Missing type definitions or component not imported
-- **Data not showing**: Component not added to dynamic zone in Strapi content type
+- **Data not showing**: Component not added to blocks collection or block not assigned to page
 - **Styling issues**: Component not matching expected CSS classes
+- **Blocks not loading**: Check that blocks are published and assigned to the correct page slug
 
 ### Example: Adding a "Testimonial" Component
 
