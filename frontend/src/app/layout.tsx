@@ -4,9 +4,11 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { getCmsData } from '@/lib/cms/getCmsData'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import Logo from '@/components/Logo'
 import Navigation from '@/components/Navigation'
 import type { GlobalSettingResponse } from '@/types/CMSResponse'
+import { ThemeProvider } from 'next-themes'
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -110,15 +112,26 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const logo = globalSetting?.logo
   const navigation = globalSetting?.navigation
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${roboto.variable} ${eb_garamond.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} ${EauBook.variable} ${EauBold.variable} ${EauBlack.variable} antialiased`}
+        className={`${roboto.variable} ${eb_garamond.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} ${EauBook.variable} ${EauBold.variable} ${EauBlack.variable} antialiased bg-background-secondary dark:bg-background-secondary-dark transition-all duration-300`}
       >
-        <Header>
-          <Logo logo={logo} />
-          <Navigation navigation={navigation} />
-        </Header>
-        {children}
+        <ThemeProvider attribute='class' enableSystem defaultTheme='system'>
+          <Header>
+            <Logo logo={logo} />
+            <Navigation navigation={navigation} />
+          </Header>
+          {children}
+          <Footer>
+            <p className='block text-sm'>
+              © 2025 Zivarri Jewels
+              &nbsp;| <a href="/privacy-policy" className='inline underline'>Privacy Policy</a>
+              &nbsp;| <a href="/terms-of-use" className='inline underline'>Terms of Use</a>
+              &nbsp;| <a href="/disclaimer" className='inline underline'>Disclaimer</a>
+              &nbsp;| <a href="/accessibility" className='inline underline'>Accessibility</a>
+            </p>
+          </Footer>
+        </ThemeProvider>
       </body>
     </html>
   )

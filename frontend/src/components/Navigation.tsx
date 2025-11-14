@@ -7,7 +7,7 @@ const Navigation = ({ navigation }: { navigation?: GlobalSettingResponse['naviga
         {navigation?.flatMap(nav =>
           nav.links?.map(link => (
             <li key={link.id}>
-              <a href={link.url} className="px-4 py-2 block">{link.title}</a>
+              <a href={link.url} className="px-4 py-4 block text-secondary dark:text-secondary-dark">{link.title}</a>
             </li>
           )) || []
         )}

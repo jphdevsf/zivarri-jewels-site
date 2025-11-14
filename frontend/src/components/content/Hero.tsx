@@ -4,35 +4,131 @@ import ImageData from './atomic/Image'
 
 // Explicit arrays for Tailwind to detect all possible margin classes (25 entries: 15 increment by 1, then 10 increment by 2)
 const topOffsetClasses = [
-  'mt-0', 'mt-1', 'mt-2', 'mt-3', 'mt-4', 'mt-5', 'mt-6', 'mt-7', 'mt-8', 'mt-9', 'mt-10',
-  'mt-11', 'mt-12', 'mt-13', 'mt-14', 'mt-16', 'mt-18', 'mt-20', 'mt-22', 'mt-24', 'mt-26', 'mt-28', 'mt-30', 'mt-32', 'mt-34'
-]
-const rightOffsetClasses = [
-  'mr-0', 'mr-1', 'mr-2', 'mr-3', 'mr-4', 'mr-5', 'mr-6', 'mr-7', 'mr-8', 'mr-9', 'mr-10',
-  'mr-11', 'mr-12', 'mr-13', 'mr-14', 'mr-16', 'mr-18', 'mr-20', 'mr-22', 'mr-24', 'mr-26', 'mr-28', 'mr-30', 'mr-32', 'mr-34'
-]
-const bottomOffsetClasses = [
-  'mb-0', 'mb-1', 'mb-2', 'mb-3', 'mb-4', 'mb-5', 'mb-6', 'mb-7', 'mb-8', 'mb-9', 'mb-10',
-  'mb-11', 'mb-12', 'mb-13', 'mb-14', 'mb-16', 'mb-18', 'mb-20', 'mb-22', 'mb-24', 'mb-26', 'mb-28', 'mb-30', 'mb-32', 'mb-34'
-]
-const leftOffsetClasses = [
-  'ml-0', 'ml-1', 'ml-2', 'ml-3', 'ml-4', 'ml-5', 'ml-6', 'ml-7', 'ml-8', 'ml-9', 'ml-10',
-  'ml-11', 'ml-12', 'ml-13', 'ml-14', 'ml-16', 'ml-18', 'ml-20', 'ml-22', 'ml-24', 'ml-26', 'ml-28', 'ml-30', 'ml-32', 'ml-34'
+  'md:mt-0',
+  'md:mt-1',
+  'md:mt-2',
+  'md:mt-3',
+  'md:mt-4',
+  'md:mt-5',
+  'md:mt-6',
+  'md:mt-7',
+  'md:mt-8',
+  'md:mt-9',
+  'md:mt-10',
+  'md:mt-11',
+  'md:mt-12',
+  'md:mt-13',
+  'md:mt-14',
+  'md:mt-16',
+  'md:mt-18',
+  'md:mt-20',
+  'md:mt-22',
+  'md:mt-24',
+  'md:mt-26',
+  'md:mt-28',
+  'md:mt-30',
+  'md:mt-32',
+  'md:mt-34'
 ]
 
+const rightOffsetClasses = [
+  'md:mr-0',
+  'md:mr-1',
+  'md:mr-2',
+  'md:mr-3',
+  'md:mr-4',
+  'md:mr-5',
+  'md:mr-6',
+  'md:mr-7',
+  'md:mr-8',
+  'md:mr-9',
+  'md:mr-10',
+  'md:mr-11',
+  'md:mr-12',
+  'md:mr-13',
+  'md:mr-14',
+  'md:mr-16',
+  'md:mr-18',
+  'md:mr-20',
+  'md:mr-22',
+  'md:mr-24',
+  'md:mr-26',
+  'md:mr-28',
+  'md:mr-30',
+  'md:mr-32',
+  'md:mr-34'
+]
+
+const bottomOffsetClasses = [
+  'md:mb-0',
+  'md:mb-1',
+  'md:mb-2',
+  'md:mb-3',
+  'md:mb-4',
+  'md:mb-5',
+  'md:mb-6',
+  'md:mb-7',
+  'md:mb-8',
+  'md:mb-9',
+  'md:mb-10',
+  'md:mb-11',
+  'md:mb-12',
+  'md:mb-13',
+  'md:mb-14',
+  'md:mb-16',
+  'md:mb-18',
+  'md:mb-20',
+  'md:mb-22',
+  'md:mb-24',
+  'md:mb-26',
+  'md:mb-28',
+  'md:mb-30',
+  'md:mb-32',
+  'md:mb-34'
+]
+
+const leftOffsetClasses = [
+  'md:ml-0',
+  'md:ml-1',
+  'md:ml-2',
+  'md:ml-3',
+  'md:ml-4',
+  'md:ml-5',
+  'md:ml-6',
+  'md:ml-7',
+  'md:ml-8',
+  'md:ml-9',
+  'md:ml-10',
+  'md:ml-11',
+  'md:ml-12',
+  'md:ml-13',
+  'md:ml-14',
+  'md:ml-16',
+  'md:ml-18',
+  'md:ml-20',
+  'md:ml-22',
+  'md:ml-24',
+  'md:ml-26',
+  'md:ml-28',
+  'md:ml-30',
+  'md:ml-32',
+  'md:ml-34'
+]
+
+
 const grid12 = [
-  'w-1/12',
-  'w-2/12',
-  'w-3/12',
-  'w-4/12',
-  'w-5/12',
-  'w-6/12',
-  'w-7/12',
-  'w-8/12',
-  'w-9/12',
-  'w-10/12',
-  'w-11/12',
-  'w-12/12'
+  'min-w-1/12',
+  'min-w-2/12',
+  'min-w-3/12',
+  'min-w-4/12',
+  'min-w-5/12',
+  'min-w-6/12',
+  'min-w-7/12',
+  'min-w-8/12',
+  'min-w-9/12',
+  'min-w-10/12',
+  'min-w-11/12',
+  'min-w-12/12'
 ]
 
 const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
@@ -46,9 +142,9 @@ const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
   if (lockup_align.y_axis === 'top') alignClasses += 'justify-start '
   if (lockup_align.y_axis === 'center') alignClasses += 'justify-center '
   if (lockup_align.y_axis === 'bottom') alignClasses += 'justify-end '
-  const widthClass = grid12[width - 1] || 'w-12/12'
+  const widthClass = grid12[width - 1] || 'min-w-12/12'
   return (
-    <div className='content-hero relative block bg-white'>
+    <div className='content-hero relative block bg-background dark:bg-background-dark'>
       {/* {schedule && (
         <div>
           <h4>Schedule</h4>
@@ -58,9 +154,11 @@ const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
       )} */}
       {firstLinkUrl && <a className='content-hero-hotspot absolute w-full h-full z-10' href={firstLinkUrl}></a>}
       <ImageData image={image} />
-      <div className={`content-hero-lockup-wrapper absolute top-0 left-0 w-full h-full flex flex-col pb-4 ${alignClasses}`}>
+      <div className={`content-hero-lockup-wrapper relative md:absolute top-0 left-0 w-full h-full flex flex-col pb-4 ${alignClasses}`}>
         <div className={`content-hero-lockup-offset block relative ${widthClass} ${offsetClasses}`}>
-          <Lockup lockup={lockup} />
+          <span className='block p-8 text-primary dark:text-primary-dark bg-background dark:bg-background-dark'>
+            <Lockup lockup={lockup} />
+          </span>
         </div>
       </div>
     </div>

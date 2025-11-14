@@ -4,7 +4,7 @@
 
 const Header = ({ children }: { children: React.ReactNode }) => {
   return (
-    <header className="flex justify-between items-center border-b border-gray-800 mb-4 p-4">
+    <header className="flex justify-between items-center border-b border-gray-800 bg-background-secondary dark:bg-background-secondary-dark mb-4 p-4">
       {children}
     </header>
   )

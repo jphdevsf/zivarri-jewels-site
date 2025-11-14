@@ -15,7 +15,7 @@ export default function Logo({ logo }: LogoProps) {
 
   return (
     <div className="logo-wrapper flex items-center gap-2">
-      <div className="logo-container white w-[32px] aspect-square overflow-hidden">
+      <div className="logo-container text-secondary dark:text-secondary-dark w-[32px] aspect-square overflow-hidden">
         {isSvg ? (
           <SvgLogo
             svgUrl={url}
@@ -32,7 +32,7 @@ export default function Logo({ logo }: LogoProps) {
           />
         )}
       </div>
-      <span className="text-center text-[2em] tracking-widest uppercase leading-none font-heading-bold mx-2">Zivarri <span className="block text-[0.5em] leading-[0.8em] font-heading">Jewels</span></span>
+      <span className="text-center text-[2em] text-primary dark:text-primary-dark tracking-widest uppercase leading-none font-heading-bold mx-2">Zivarri <span className="block text-[0.5em] leading-[0.8em] font-heading">Jewels</span></span>
     </div>
   )
 }

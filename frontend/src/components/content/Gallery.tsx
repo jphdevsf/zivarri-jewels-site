@@ -12,9 +12,8 @@ const Gallery = ({ title, images }: GalleryBanner) => {
       )} */}
       <p>Title: {title}</p>
       <div>
-        <h4>Images</h4>
         {images.map((image) => (
-          <div key={image.id}>
+          <div key={image.id} className=' p2 block dark:text-primary-dark bg-background dark:bg-background-dark'>
             <p>Image ID: {image.id}</p>
             <p>URL: {image.url}</p>
             <p>Width: {image.width}</p>

@@ -1,11 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #2f2120;
+  --color-secondary: #2e303e;
+  --color-tertiary: #505852;
+  --color-background: #fff2ee;
+  --color-background-secondary: #ece0dc;
+  --color-background-tertiary: #d2c3bd;
+
+  --color-primary-dark: #eee1e0;
+  --color-secondary-dark: #b6b9c9;
+  --color-tertiary-dark: #94a9a9;
+  --color-background-dark: #161414;
+  --color-background-secondary-dark: #1a1919;
+  --color-background-tertiary-dark: #2f2a2a;
 }
 
-@theme inline {
+@theme {
+  --color-primary: #2f2120;
+  --color-secondary: #2e303e;
+  --color-tertiary: #505852;
+  --color-background: #fff2ee;
+  --color-background-secondary: #ece0dc;
+  --color-background-tertiary: #d2c3bd;
+
+  --color-primary-dark: #eee1e0;
+  --color-secondary-dark: #b6b9c9;
+  --color-tertiary-dark: #94a9a9;
+  --color-background-dark: #161414;
+  --color-background-secondary-dark: #1a1919;
+  --color-background-tertiary-dark: #2f2a2a;
+
   --font-main: var(--font-eau_sans_book_lng);
   --font-heading: var(--font-eb_garamond);
   --font-heading-bold: var(--font-eb_garamond);
@@ -14,20 +39,10 @@
   --font-eau-black: var(--font-eau_sans_black_lng);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-eau_sans_book_lng), system-ui, -apple-system, sans-serif;
 }
 
-/* Heading elements use Walkway-Expand-Bold */
 h1,
 h2,
 h3,

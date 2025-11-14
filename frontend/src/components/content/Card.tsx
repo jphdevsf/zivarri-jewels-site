@@ -6,7 +6,7 @@ const Card = ({ lockup, image }: CardBanner) => {
   const { links } = lockup
   const firstLinkUrl = links && links.length > 0 ? links[0].url : null
   return (
-    <div className="content-card relative bg-white md:flex md:flex-col justify-start lg:justify-beteween">
+    <div className="content-card relative mb-8 md:mb-0 md:flex md:flex-col justify-start lg:justify-beteween text-primary block p-8 pb-4 dark:text-primary-dark bg-background dark:bg-background-dark">
       {/* {schedule && (
       <div>
         <h4>Schedule</h4>
@@ -23,7 +23,7 @@ const Card = ({ lockup, image }: CardBanner) => {
           <ImageData image={image} />
         </div>
       )}
-      <div className='flex flex-col h-[12em] relative justify-center'>
+      <div className='flex flex-col relative justify-center'>
         <Lockup lockup={lockup} />
       </div>
     </div>

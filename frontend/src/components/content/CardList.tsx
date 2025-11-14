@@ -3,7 +3,7 @@ import Card from './Card'
 
 const CardList = ({ title, carousel_desktop, carousel_mobile, cards }: CardListBanner) => {
   return (
-    <div className='content-card-list my-2'>
+    <div className='content-card-list'>
       {/* <p>Carousel Desktop: {carousel_desktop ? 'Yes' : 'No'}</p>
       <p>Carousel Mobile: {carousel_mobile ? 'Yes' : 'No'}</p> */}
       <h2 className='text-3xl'>{title}</h2>

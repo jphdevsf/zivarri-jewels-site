@@ -10,7 +10,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U strapiuser -d strapidb']
+      test: [ 'CMD-SHELL', 'pg_isready -U strapiuser -d strapidb' ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -18,7 +18,7 @@ services:
   strapi-dev:
     build: ./cms
     command: npm run start-dev
-    profiles: ["dev"]
+    profiles: [ "dev" ]
     ports:
       - '1337:1337'
     volumes:
@@ -34,7 +34,7 @@ services:
   strapi-prod:
     build: ./cms
     command: npm run start-prod
-    profiles: ["prod"]
+    profiles: [ "prod" ]
     ports:
       - '1337:1337'
     volumes:
@@ -47,7 +47,7 @@ services:
   frontend-dev:
     build: ./frontend
     command: npm run start-dev
-    profiles: ["dev"]
+    profiles: [ "dev" ]
     ports:
       - '3000:3000'
     volumes:
@@ -62,7 +62,7 @@ services:
   frontend-prod:
     build: ./frontend
     command: npm run start-prod
-    profiles: ["prod"]
+    profiles: [ "prod" ]
     ports:
       - '3000:3000'
     volumes:

@@ -4,7 +4,7 @@ FROM node:20
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --platform=linux --arch=x64
+RUN npm install --platform=linux --arch=x64 --legacy-peer-deps --ignore-scripts
 
 COPY . .
 
