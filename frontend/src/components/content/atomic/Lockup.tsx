@@ -6,7 +6,7 @@ const Lockup = ({ lockup }: { lockup: Lockup }) => {
   const { leadin, title, subtitle, price, links, text_align } = lockup
   const textAlign = text_align === 'left' ? 'text-left' : text_align === 'right' ? 'text-right' : 'text-center'
   return (
-    <span key={lockup.id} className={`content-lockup block relative flex flex-row justify-center items-center p-1 bg-background dark:bg-background-dark ${textAlign} ${styles.lockup}`}>
+    <span key={lockup.id} className={`content-lockup relative flex flex-row justify-center items-center p-1 bg-background dark:bg-background-dark ${textAlign} ${styles.lockup}`}>
       <span className='inline-block'>
         {leadin && <span className={`lockup-leadin block relative tracking-wide mt-1 ${styles.leadin}`}>{leadin}</span>}
         <h2 className={`lockup-title block relative font-semibold mt-1 ${styles.title}`}>{title}</h2>

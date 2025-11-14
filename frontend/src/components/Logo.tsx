@@ -15,7 +15,7 @@ export default function Logo({ logo }: LogoProps) {
 
   return (
     <div className="logo-wrapper flex items-center gap-2">
-      <div className="logo-container text-secondary dark:text-secondary-dark w-[32px] aspect-square overflow-hidden">
+      <div className="logo-container text-secondary dark:text-secondary-dark w-8 aspect-square overflow-hidden">
         {isSvg ? (
           <SvgLogo
             svgUrl={url}
