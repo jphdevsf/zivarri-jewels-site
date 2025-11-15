@@ -1,14 +1,38 @@
 # 🛠 Zivarri Jewels Site — Monorepo Stack
 
-This repo is a full-stack jewelry website and monorepo powered by Next.js, Strapi, and PostgreSQL, containerized with Docker and orchestrated via Docker Compose. The project features a comprehensive component architecture with 14 React components, dynamic content management through Strapi CMS, and advanced styling with Tailwind CSS and CSS modules.
+- [About The Stack](#about-the-stack)
+- [Roadmap-Lite](#roadmap-lite)
+- [📦 Stack Overview](#-stack-overview)
+- [🚀 Installation](#-installation)
+- [🧪 Local Development](#-local-development)
+- [🚀 Production Mode](#-production-mode)
+- [🧰 Primary CLI Commands](#-primary-cli-commands)
+- [📁 Project Structure](#-project-structure)
+- [🏗️ CMS Component Architecture](#-cms-component-architecture)
+- [🧩 Adding New Strapi Components](#-adding-new-strapi-components)
+- [🧯 Troubleshooting](#-troubleshooting
+
+## About The Stack
+This repository contains a full‑stack jewelry portfolio website for Zivarri Jewels, a fine custom jewelry and repair studio based in Eureka, CA. The project is structured as a monorepo built on the Next.js framework using TypeScript, with a self‑hosted instance of Strapi as the headless CMS (PostgreSQL for data storage) to allow the client to manage static content. The entire stack is containerized with Docker. The UI is composed of custom React components styled primarily with TailwindCSS, with selective use of CSS modules for flexibility.
+
+## Roadmap-Lite
+- **Phase One:** Launch a streamlined site that showcases the client’s offerings and provides inspiration designed to encourage custom jewelry commissions.
+- **Phase Two and Beyond:** Enable ecommerce features, analytics, customer retention strategies (e.g., email signup, omni promotional campaigns), user‑generated content widgets, and jewelry‑making class offerings.
+
+---
 
 ## 📦 Stack Overview
 
 | Service  | Tech        | Purpose                               |
 |----------|-------------|---------------------------------------|
-| frontend | Next.js     | Public-facing storefront               |
-| cms      | Strapi      | Headless CMS for content & admin       |
-| postgres | PostgreSQL  | Persistent data storage                |
+| Frontend | Next.js     | Public-facing storefront               |
+| CMS      | Strapi      | Headless CMS for content & admin       |
+| Postgres | PostgreSQL  | Persistent data storage                |
+| TailwindCSS | CSS Framework  | Utility class system             |
+| Container | Docker  | Faciliates smoother deployment from local to hosting |
+| Analytics | GA4 | customer engagement and site performance tracking |
+| Contact form | MailerLite | SMTP service |
+
 
 ## 🚀 Installation
 
@@ -141,89 +165,11 @@ zivarri-jewels-site/
 └── docker-compose.yml             # Container orchestration
 ```
 
-## ✅ What's Working
+---
 
-- **Complete Component Architecture**: 14 React components with TypeScript
-  - 7 content components (Hero, Card, CardList, SectionHeader, FreeformText, Gallery, PageRenderer)
-  - 3 atomic components (Lockup, Image, Link) for reusability
-  - 4 layout components (Header, Logo, Navigation, SvgLogo)
-- **Advanced Styling System**: Tailwind CSS + CSS modules with em-based typography scaling
-- **Dynamic Content Management**: Strapi CMS with reusable blocks and flexible content types
-- **Hero Component Features**: Dynamic positioning, CSS modules, hover effects, responsive design
-- **Dockerized Monorepo**: Isolated services with dev/prod profiles
-- **TypeScript Integration**: Full type safety across frontend and CMS
-- **Component Relationships**: Mapped dependencies and usage patterns
-- **Responsive Design**: Mobile-first approach with Tailwind utilities
+## 🏗️ CMS Component Architecture
 
-## 🧯 Troubleshooting
-
-### ❌ Port Already Allocated Error
-If you see an error like:
-```bash
-Bind for 0.0.0.0:1337 failed: port is already allocated
-```
-This means another container or process is already using port `1337` on your machine — often caused by leftover containers from previous runs.
-
-### ✅ Fix: Clean up orphaned containers
-
-Run this command to stop and remove any orphaned containers:
-
-```bash
-docker-compose --profile dev down --remove-orphans
-```
-
-### ❌ Module Not Found (e.g., 'qs' or other packages)
-If you see "Module not found" errors in the frontend container (e.g., after installing new packages), the container's `node_modules` is out of sync.
-
-### ✅ Fix: Rebuild the affected service
-
-```bash
-# Stop containers first
-docker-compose --profile dev down
-
-# Rebuild frontend (or cms-dev if CMS packages changed)
-docker-compose --profile dev build frontend-dev
-
-# Restart
-docker-compose --profile dev up
-```
-
-Always rebuild after adding/removing packages in `frontend/package.json` or `cms/package.json`.
-
-### ❌ Container Name Conflict Error
-If you see an error like:
-```bash
-Error response from daemon: Conflict. The container name "/zivarri-jewels-site-strapi-dev-1" is already in use by container "2a82c368569d22089201a779c67ed84b8799ff970b907dd6bf608ef22e7e9c68". You have to remove (or rename) that container to be able to reuse that name.
-```
-This means a container from a previous run wasn't properly cleaned up and is still present.
-
-### ✅ Fix: Remove the conflicting container
-
-1. Stop and remove all containers:
-   ```bash
-   docker-compose down
-   ```
-
-2. Check for remaining containers:
-   ```bash
-   docker ps -a
-   ```
-
-3. Remove the specific conflicting container (replace with actual name if different):
-   ```bash
-   docker rm zivarri-jewels-site-strapi-dev-1
-   ```
-
-4. Restart the stack:
-   ```bash
-   docker-compose --profile dev up
-   ```
-
-## 🏗️ Component Architecture
-
-The frontend uses a hierarchical component structure designed for reusability and maintainability:
-
-### **Content Components** (Blocks Architecture)
+### **Content Components** ("Blocks" in Strapi)
 - **PageRenderer**: Central hub that maps Strapi blocks to React components
 - **Hero**: Banner component with dynamic positioning and CSS modules
 - **Card**: Individual content cards using Lockup and Image components
@@ -232,15 +178,16 @@ The frontend uses a hierarchical component structure designed for reusability an
 - **FreeformText**: Flexible text content display
 - **Gallery**: Image collection display
 
-### **Atomic Components** (Reusable Building Blocks)
-- **Lockup**: Text content with em-based typography scaling (1em parent, 1.75em title, 1.25em price, 1em subtitle, 0.8em lead-in)
-- **Image**: Responsive image rendering with desktop/mobile variants
+### **Atomic Components**
+- **Lockup**: Text group containing most common data fields used across all blocks (leadin, title, subtitle, price, one or more CTAs).
+- **Image**: Responsive image rendering with ability to configure desktop and mobile assets.
 - **Link**: Interactive links with hover effects and animations
 
-### **Layout Components** (Site Structure)
-- **Header**: Main navigation container
-- **Logo/SvgLogo**: Branding components
-- **Navigation**: Menu and routing system
+### **Page Layout Components**
+- **Header**
+  - **Logo/SvgLogo**: Branding components
+  - **Navigation**: Menu and routing system
+- **Footer**: typical copyright, and legal links.
 
 ### **Component Relationships**
 ```
@@ -414,3 +361,69 @@ export interface TestimonialBanner extends Banner {
   author_image: ImageData;
 }
 ```
+
+---
+
+## 🧯 Troubleshooting
+
+### ❌ Port Already Allocated Error
+If you see an error like:
+```bash
+Bind for 0.0.0.0:1337 failed: port is already allocated
+```
+This means another container or process is already using port `1337` on your machine — often caused by leftover containers from previous runs.
+
+### ✅ Fix: Clean up orphaned containers
+
+Run this command to stop and remove any orphaned containers:
+
+```bash
+docker-compose --profile dev down --remove-orphans
+```
+
+### ❌ Module Not Found (e.g., 'qs' or other packages)
+If you see "Module not found" errors in the frontend container (e.g., after installing new packages), the container's `node_modules` is out of sync.
+
+### ✅ Fix: Rebuild the affected service
+
+```bash
+# Stop containers first
+docker-compose --profile dev down
+
+# Rebuild frontend (or cms-dev if CMS packages changed)
+docker-compose --profile dev build frontend-dev
+
+# Restart
+docker-compose --profile dev up
+```
+
+Always rebuild after adding/removing packages in `frontend/package.json` or `cms/package.json`.
+
+### ❌ Container Name Conflict Error
+If you see an error like:
+```bash
+Error response from daemon: Conflict. The container name "/zivarri-jewels-site-strapi-dev-1" is already in use by container "2a82c368569d22089201a779c67ed84b8799ff970b907dd6bf608ef22e7e9c68". You have to remove (or rename) that container to be able to reuse that name.
+```
+This means a container from a previous run wasn't properly cleaned up and is still present.
+
+### ✅ Fix: Remove the conflicting container
+
+1. Stop and remove all containers:
+   ```bash
+   docker-compose down
+   ```
+
+2. Check for remaining containers:
+   ```bash
+   docker ps -a
+   ```
+
+3. Remove the specific conflicting container (replace with actual name if different):
+   ```bash
+   docker rm zivarri-jewels-site-strapi-dev-1
+   ```
+
+4. Restart the stack:
+   ```bash
+   docker-compose --profile dev up
+   ```
