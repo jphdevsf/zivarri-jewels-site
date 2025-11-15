@@ -10,7 +10,7 @@
 - [📁 Project Structure](#-project-structure)
 - [🏗️ CMS Component Architecture](#-cms-component-architecture)
 - [🧩 Adding New Strapi Components](#-adding-new-strapi-components)
-- [🧯 Troubleshooting](#-troubleshooting
+- [🧯 Troubleshooting](#-troubleshooting)
 
 ## About The Stack
 This repository contains a full‑stack jewelry portfolio website for Zivarri Jewels, a fine custom jewelry and repair studio based in Eureka, CA. The project is structured as a monorepo built on the Next.js framework using TypeScript, with a self‑hosted instance of Strapi as the headless CMS (PostgreSQL for data storage) to allow the client to manage static content. The entire stack is containerized with Docker. The UI is composed of custom React components styled primarily with TailwindCSS, with selective use of CSS modules for flexibility.
