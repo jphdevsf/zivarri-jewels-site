@@ -49,12 +49,12 @@ export type BlockBanner =
 export interface Lockup {
   id: number;
   text_align: string;
-  width: number;
-  leadin: string;
-  title: string;
-  subtitle: string;
-  price: string;
-  links: Array<{
+  width?: number;
+  leadin?: string;
+  title?: string;
+  subtitle?: string;
+  price?: string;
+  links?: Array<{
     id: number;
     title: string;
     url: string;

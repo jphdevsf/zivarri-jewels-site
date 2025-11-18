@@ -27,7 +27,7 @@ const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   if (!data) return notFound()
 
   return (
-    <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-8 md:gap-12 px-4'>
+    <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-4 px-4'>
       <h1 className="sr-only">{data.title}</h1>
       {blocks && blocks.map((banner: BlockBanner) => {
         const key = banner.__component as keyof typeof componentMap

@@ -1,5 +1,11 @@
 const dZLockup = {
-  populate: '*'
+  fields: ['text_align', 'leadin', 'title', 'subtitle', 'price', 'width'],
+  populate: {
+    links: {
+      fields: ['title', 'url'],
+      populate: '*'
+    }
+  }
 }
 
 const dZLockupAlign = {

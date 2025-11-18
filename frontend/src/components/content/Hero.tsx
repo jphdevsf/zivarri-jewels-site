@@ -142,7 +142,7 @@ const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
   if (lockup_align.y_axis === 'top') alignClasses += 'justify-start '
   if (lockup_align.y_axis === 'center') alignClasses += 'justify-center '
   if (lockup_align.y_axis === 'bottom') alignClasses += 'justify-end '
-  const widthClass = grid12[width - 1] || 'min-w-12/12'
+  const widthClass = width ? grid12[width - 1] : 'min-w-12/12'
   return (
     <div className='content-hero relative block bg-background dark:bg-background-dark'>
       {/* {schedule && (

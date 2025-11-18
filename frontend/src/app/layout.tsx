@@ -123,7 +123,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           </Header>
           {children}
           <Footer>
-            <p className='block text-sm'>
+            <p className='block text-xs'>
               © 2025 Zivarri Jewels
               &nbsp;| <a href="/privacy-policy" className='inline underline'>Privacy Policy</a>
               &nbsp;| <a href="/terms-of-use" className='inline underline'>Terms of Use</a>
