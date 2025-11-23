@@ -32,6 +32,18 @@ export interface ContentCardList extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentFormDynamicZone extends Struct.ComponentSchema {
+  collectionName: 'components_content_form_dynamic_zones';
+  info: {
+    description: '';
+    displayName: 'Form';
+    icon: 'expand';
+  };
+  attributes: {
+    form_items: Schema.Attribute.Component<'element.form-item', true>;
+  };
+}
+
 export interface ContentFreeformText extends Struct.ComponentSchema {
   collectionName: 'components_content_freeform_texts';
   info: {
@@ -146,6 +158,22 @@ export interface ElementButton extends Struct.ComponentSchema {
     title: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<['primary', 'secondary', 'tertiary']>;
     url: Schema.Attribute.String;
+  };
+}
+
+export interface ElementFormItem extends Struct.ComponentSchema {
+  collectionName: 'components_element_form_items';
+  info: {
+    displayName: 'Form_item';
+    icon: 'envelop';
+  };
+  attributes: {
+    enabled: Schema.Attribute.Boolean;
+    error_text: Schema.Attribute.String;
+    guidance_text: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean;
+    type: Schema.Attribute.Enumeration<['short text', 'long text', 'checkbox']>;
   };
 }
 
@@ -285,12 +313,14 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'content.card': ContentCard;
       'content.card-list': ContentCardList;
+      'content.form-dynamic-zone': ContentFormDynamicZone;
       'content.freeform-text': ContentFreeformText;
       'content.gallery': ContentGallery;
       'content.hero': ContentHero;
       'content.section-header': ContentSectionHeader;
       'element.alignment': ElementAlignment;
       'element.button': ElementButton;
+      'element.form-item': ElementFormItem;
       'element.hierarchy': ElementHierarchy;
       'element.image': ElementImage;
       'element.link': ElementLink;

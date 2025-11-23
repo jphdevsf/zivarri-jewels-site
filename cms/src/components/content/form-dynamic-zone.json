@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_content_form_dynamic_zones",
+  "info": {
+    "displayName": "Form",
+    "icon": "expand",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "form_items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.form-item"
+    }
+  }
+}

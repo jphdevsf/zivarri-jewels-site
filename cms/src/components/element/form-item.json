@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_element_form_items",
+  "info": {
+    "displayName": "Form_item",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "short text",
+        "long text",
+        "checkbox"
+      ]
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "error_text": {
+      "type": "string"
+    },
+    "guidance_text": {
+      "type": "string"
+    }
+  }
+}

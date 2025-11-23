@@ -24,7 +24,8 @@
         "content.card",
         "content.card-list",
         "content.hero",
-        "content.freeform-text"
+        "content.freeform-text",
+        "content.form-dynamic-zone"
       ]
     },
     "pages": {

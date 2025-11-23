@@ -27,7 +27,6 @@ export const getPageBanners = async (slug: string): Promise<BlockBanner[]> => {
     const orderB = b.page_order || 1
     return orderA - orderB
   })
-
   const content = blocks.flatMap(block => block.content || []).filter(Boolean) as BlockBanner[]
 
   return content

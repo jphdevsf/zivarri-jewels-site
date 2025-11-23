@@ -6,6 +6,7 @@ import SectionHeader from './content/SectionHeader'
 import FreeformText from './content/FreeformText'
 import Gallery from './content/Gallery'
 import CardList from './content/CardList'
+import Form from './content/Form'
 import type { BlockBanner } from '@/types/content'
 import React from 'react'
 
@@ -16,6 +17,7 @@ const componentMap = {
   'content.freeform-text': FreeformText,
   'content.gallery': Gallery,
   'content.card-list': CardList,
+  'content.form-dynamic-zone': Form,
 } as const
 
 interface PageRendererProps {

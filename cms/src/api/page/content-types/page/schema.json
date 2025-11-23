@@ -19,17 +19,6 @@
       "type": "uid",
       "targetField": "title"
     },
-    "banners": {
-      "type": "dynamiczone",
-      "components": [
-        "content.card",
-        "content.card-list",
-        "content.section-header",
-        "content.gallery",
-        "content.freeform-text",
-        "content.hero"
-      ]
-    },
     "seo": {
       "type": "component",
       "repeatable": false,

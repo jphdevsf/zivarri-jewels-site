@@ -389,6 +389,7 @@ export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
         'content.card-list',
         'content.hero',
         'content.freeform-text',
+        'content.form-dynamic-zone',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -459,16 +460,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    banners: Schema.Attribute.DynamicZone<
-      [
-        'content.card',
-        'content.card-list',
-        'content.section-header',
-        'content.gallery',
-        'content.freeform-text',
-        'content.hero',
-      ]
-    >;
     blocks: Schema.Attribute.Relation<'manyToMany', 'api::block.block'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
