@@ -120,3 +120,9 @@ export interface FormBlock extends BaseBanner {
   __component: 'content.contact-form';
   title: string;
 }
+
+export interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}

@@ -1,14 +1,36 @@
 'use client'
 
-import { useForm, SubmitHandler } from 'react-hook-form'
-import type { FormBlock } from '@/types/content'
+import { useForm } from 'react-hook-form'
+import type { FormBlock, FormData } from '@/types/content'
+import { useState } from 'react'
 
 const Form = ({ title }: FormBlock) => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
 
-  const onSubmit: SubmitHandler<Record<string, any>> = (data) => {
+  const onSubmit = async (data: FormData) => {
     console.log('Form submitted:', data)
-    // TODO: call your Strapi API endpoint here
+    setLoading(true)
+    setMessage('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      const result = await res.json()
+      if (result.success) {
+        reset()
+        setMessage('Thanks! Message sent successfully.')
+      } else {
+        setMessage('Failed to send. Please try again.')
+      }
+    } catch {
+      setMessage('Failed to send. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
   const shortInputClassList = 'w-full max-w-sm mb-4 px-3 py-2 dark:bg-stone-600 bg-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300'
   const textAreaClassList = 'w-full max-w-xl mb-4 px-3 py-2 dark:bg-stone-600 bg-stone-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300'
@@ -34,20 +56,26 @@ const Form = ({ title }: FormBlock) => {
 
         <label className={labelClassList}>Message</label>
         <textarea
-          {...register('message', { required: true, maxLength: 500 })}
+          {...register('message', { required: true, maxLength: 1000 })}
           className={textAreaClassList}
           rows={4}
         />
         {errors.message && errors.message.type === 'required' && <span className={errorClassList}>Please include a message in your inquiry.</span>}
-        {errors.message && errors.message.type === 'maxLength' && <span className={errorClassList}>Please limit your message to 500 characters or less.</span>}
+        {errors.message && errors.message.type === 'maxLength' && <span className={errorClassList}>Please limit your message to 1000 characters or less.</span>}
 
         <button
           type="submit"
-          className="content-form-button block relative text-background bg-primary dark:text-background dark:bg-primary border hover:text-primary hover:bg-background transition-all duration-300 text-center text-md py-3 px-8 z-20 my-2"
+          disabled={loading}
+          className="content-form-button block relative text-background bg-primary dark:text-background dark:bg-primary border hover:text-primary hover:bg-background transition-all duration-300 text-center text-md py-3 px-8 z-20 my-2 opacity-50 cursor-not-allowed disabled:pointer-events-none"
         >
-          Submit
+          {loading ? 'Sending...' : 'Submit'}
         </button>
       </form>
+      {message && (
+        <p className="mt-4 px-8 text-green-600 dark:text-green-400 text-center">
+          {message}
+        </p>
+      )}
     </>
   )
 }

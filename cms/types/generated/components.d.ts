@@ -24,9 +24,9 @@ export interface ContentCardList extends Struct.ComponentSchema {
   attributes: {
     cards: Schema.Attribute.Component<'content.card', true>;
     carousel_desktop: Schema.Attribute.Boolean &
-    Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<false>;
     carousel_mobile: Schema.Attribute.Boolean &
-    Schema.Attribute.DefaultTo<false>;
+      Schema.Attribute.DefaultTo<false>;
     schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String;
   };
@@ -119,41 +119,41 @@ export interface ElementAlignment extends Struct.ComponentSchema {
   };
   attributes: {
     offset_bottom: Schema.Attribute.Integer &
-    Schema.Attribute.SetMinMax<
-      {
-        max: 25;
-      },
-      number
-    > &
-    Schema.Attribute.DefaultTo<0>;
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     offset_left: Schema.Attribute.Integer &
-    Schema.Attribute.SetMinMax<
-      {
-        max: 25;
-      },
-      number
-    > &
-    Schema.Attribute.DefaultTo<0>;
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     offset_right: Schema.Attribute.Integer &
-    Schema.Attribute.SetMinMax<
-      {
-        max: 25;
-      },
-      number
-    > &
-    Schema.Attribute.DefaultTo<0>;
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     offset_top: Schema.Attribute.Integer &
-    Schema.Attribute.SetMinMax<
-      {
-        max: 25;
-      },
-      number
-    > &
-    Schema.Attribute.DefaultTo<0>;
+      Schema.Attribute.SetMinMax<
+        {
+          max: 25;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
     x_axis: Schema.Attribute.Enumeration<['center', 'left', 'right']> &
-    Schema.Attribute.DefaultTo<'center'>;
+      Schema.Attribute.DefaultTo<'center'>;
     y_axis: Schema.Attribute.Enumeration<['center', 'top', 'bottom']> &
-    Schema.Attribute.DefaultTo<'center'>;
+      Schema.Attribute.DefaultTo<'center'>;
   };
 }
 
@@ -228,16 +228,16 @@ export interface ElementLockup extends Struct.ComponentSchema {
     price: Schema.Attribute.String;
     subtitle: Schema.Attribute.String;
     text_align: Schema.Attribute.Enumeration<['center', 'left', 'right']> &
-    Schema.Attribute.DefaultTo<'center'>;
+      Schema.Attribute.DefaultTo<'center'>;
     title: Schema.Attribute.String;
     width: Schema.Attribute.Integer &
-    Schema.Attribute.SetMinMax<
-      {
-        max: 12;
-      },
-      number
-    > &
-    Schema.Attribute.DefaultTo<12>;
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<12>;
   };
 }
 
@@ -298,7 +298,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
         'LocalBusiness',
       ]
     > &
-    Schema.Attribute.Required;
+      Schema.Attribute.Required;
     seoImage: Schema.Attribute.Media<'images' | 'files'>;
   };
 }
@@ -309,6 +309,7 @@ declare module '@strapi/strapi' {
       'content.card': ContentCard;
       'content.card-list': ContentCardList;
       'content.contact-form': ContentContactForm;
+      'content.form-dynamic-zone': ContentFormDynamicZone;
       'content.freeform-text': ContentFreeformText;
       'content.gallery': ContentGallery;
       'content.hero': ContentHero;
