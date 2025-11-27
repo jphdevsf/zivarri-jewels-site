@@ -7,6 +7,7 @@
   --color-background: #fff2ee;
   --color-background-secondary: #ece0dc;
   --color-background-tertiary: #d2c3bd;
+  --color-confirmation: #2f3251;
 
   --color-primary-dark: #eee1e0;
   --color-secondary-dark: #b6b9c9;
@@ -14,6 +15,7 @@
   --color-background-dark: #161414;
   --color-background-secondary-dark: #1a1919;
   --color-background-tertiary-dark: #2f2a2a;
+  --color-confirmation-dark: #9a9fd5;
 }
 
 @theme {
@@ -23,6 +25,7 @@
   --color-background: #fff2ee;
   --color-background-secondary: #ece0dc;
   --color-background-tertiary: #d2c3bd;
+  --color-confirmation: #2f3251;
 
   --color-primary-dark: #eee1e0;
   --color-secondary-dark: #b6b9c9;
@@ -30,6 +33,7 @@
   --color-background-dark: #161414;
   --color-background-secondary-dark: #1a1919;
   --color-background-tertiary-dark: #2f2a2a;
+  --color-confirmation-dark: #9a9fd5;
 
   --font-main: var(--font-eau_sans_book_lng);
   --font-heading: var(--font-eb_garamond);
