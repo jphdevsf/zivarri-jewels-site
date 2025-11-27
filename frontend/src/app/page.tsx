@@ -12,6 +12,5 @@ export async function generateMetadata() {
 export default async function HomePage() {
   const data = await getFullPageData('home')
   const blocks = await getPageBanners('home')
-
   return <PageRenderer data={data as PageAndSeoResponse} blocks={blocks} />
 }

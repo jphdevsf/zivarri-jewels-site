@@ -1,6 +1,6 @@
 import type { HeroBanner } from '@/types/content'
 import Lockup from './atomic/Lockup'
-import ImageData from './atomic/Image'
+import PictureElement from './atomic/Image'
 
 // Explicit arrays for Tailwind to detect all possible margin classes (25 entries: 15 increment by 1, then 10 increment by 2)
 const topOffsetClasses = [
@@ -132,16 +132,18 @@ const grid12 = [
 ]
 
 const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
-  const { links, width } = lockup
+  const { links, width } = lockup || {}
   const firstLinkUrl = links && links.length > 0 ? links[0].url : null
-  const offsetClasses = `${topOffsetClasses[lockup_align.offset_top | 0]} ${rightOffsetClasses[lockup_align.offset_right | 0]} ${bottomOffsetClasses[lockup_align.offset_bottom | 0]} ${leftOffsetClasses[lockup_align.offset_left | 0]}`
+  const offsetClasses = lockup_align && `${topOffsetClasses[lockup_align.offset_top | 0]} ${rightOffsetClasses[lockup_align.offset_right | 0]} ${bottomOffsetClasses[lockup_align.offset_bottom | 0]} ${leftOffsetClasses[lockup_align.offset_left | 0]}` || ''
   let alignClasses = ''
-  if (lockup_align.x_axis === 'left') alignClasses += 'items-start '
-  if (lockup_align.x_axis === 'center') alignClasses += 'items-center '
-  if (lockup_align.x_axis === 'right') alignClasses += 'items-end '
-  if (lockup_align.y_axis === 'top') alignClasses += 'justify-start '
-  if (lockup_align.y_axis === 'center') alignClasses += 'justify-center '
-  if (lockup_align.y_axis === 'bottom') alignClasses += 'justify-end '
+  if (lockup_align) {
+    if (lockup_align.x_axis === 'left') alignClasses += 'items-start '
+    if (lockup_align.x_axis === 'center') alignClasses += 'items-center '
+    if (lockup_align.x_axis === 'right') alignClasses += 'items-end '
+    if (lockup_align.y_axis === 'top') alignClasses += 'justify-start '
+    if (lockup_align.y_axis === 'center') alignClasses += 'justify-center '
+    if (lockup_align.y_axis === 'bottom') alignClasses += 'justify-end '
+  }
   const widthClass = width ? grid12[width - 1] : 'min-w-12/12'
   return (
     <div className='content-hero relative block bg-background dark:bg-background-dark'>
@@ -153,7 +155,7 @@ const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
         </div>
       )} */}
       {firstLinkUrl && <a className='content-hero-hotspot absolute w-full h-full z-10' href={firstLinkUrl}></a>}
-      <ImageData image={image} />
+      <PictureElement image={image} />
       <div className={`content-hero-lockup-wrapper relative md:absolute top-0 left-0 w-full h-full flex flex-col pb-4 ${alignClasses}`}>
         <div className={`content-hero-lockup-offset block relative ${widthClass} ${offsetClasses}`}>
           <span className='block p-8 text-primary dark:text-primary-dark bg-background dark:bg-background-dark'>

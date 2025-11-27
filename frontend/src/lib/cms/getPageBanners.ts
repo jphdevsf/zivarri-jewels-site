@@ -20,7 +20,6 @@ export const getPageBanners = async (slug: string): Promise<BlockBanner[]> => {
   })
 
   const blocks = (res.data as BlockResponse[]) || []
-
   // Sort by page_order if it exists
   blocks.sort((a, b) => {
     const orderA = a.page_order || 1
@@ -28,6 +27,5 @@ export const getPageBanners = async (slug: string): Promise<BlockBanner[]> => {
     return orderA - orderB
   })
   const content = blocks.flatMap(block => block.content || []).filter(Boolean) as BlockBanner[]
-
   return content
 }

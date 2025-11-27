@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_content_contact_forms",
+  "info": {
+    "displayName": "Contact Form",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

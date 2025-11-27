@@ -45,7 +45,7 @@ export type BlockBanner =
   | FreeformTextBanner
   | GalleryBanner
   | CardListBanner
-  | Form;
+  | FormBlock;
 
 export interface Lockup {
   id: number;
@@ -60,16 +60,6 @@ export interface Lockup {
     title: string;
     url: string;
   }>;
-}
-
-export interface FormItem {
-  id: number;
-  label: string;
-  type: string;
-  error_text: string;
-  guidance_text: string;
-  enabled: boolean;
-  required: boolean;
 }
 
 export interface BaseBanner {
@@ -126,7 +116,7 @@ export interface CardListBanner extends BaseBanner {
   cards: CardBanner[];
 }
 
-export interface Form extends BaseBanner {
-  __component: 'content.form-dynamic-zone';
-  form_items: FormItem[]
+export interface FormBlock extends BaseBanner {
+  __component: 'content.contact-form';
+  title: string;
 }

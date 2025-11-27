@@ -73,11 +73,7 @@ export const dynamicZoneQuery = {
   'content.freeform-text': {
     populate: '*'
   },
-  'content.form-dynamic-zone': {
-    populate: {
-      form_items: {
-        populate: '*'
-      }
-    }
-  },
+  'content.contact-form': {
+    fields: ['title']
+  }
 }

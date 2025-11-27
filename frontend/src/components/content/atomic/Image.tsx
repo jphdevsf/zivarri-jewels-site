@@ -16,31 +16,31 @@ type ResponsiveImageData = {
   mobile: SimpleImageData;
 }
 
-const ImageData = ({ image }: { image: ResponsiveImageData }) => {
+const PictureElement = ({ image }: { image: ResponsiveImageData }) => {
   // Check if it's a responsive image (has desktop and mobile)
   if ('desktop' in image && 'mobile' in image) {
     const responsiveImage = image as ResponsiveImageData
     const { desktop, mobile, altText } = responsiveImage
     return (
-      <div className="content-image">
+      <div className='content-image'>
         <picture>
-          <source
-            media="(min-width: 768px)"
+          {desktop && <source
+            media='(min-width: 768px)'
             srcSet={toAbsoluteStrapiUrl(desktop.url)!}
             width={desktop.width}
             height={desktop.height}
-          />
-          <source
-            media="(max-width: 767px)"
+          />}
+          {mobile && <source
+            media='(max-width: 767px)'
             srcSet={toAbsoluteStrapiUrl(mobile.url)!}
             width={mobile.width}
             height={mobile.height}
-          />
+          />}
           <Image
-            src={toAbsoluteStrapiUrl(desktop.url)!}
-            alt={altText}
-            width={desktop.width}
-            height={desktop.height}
+            src={desktop ? toAbsoluteStrapiUrl(desktop.url)! : mobile ? toAbsoluteStrapiUrl(mobile.url)! : ''}
+            alt={altText || ''}
+            width={desktop ? desktop.width : mobile ? mobile.width : 0}
+            height={desktop ? desktop.height : mobile ? mobile.height : 0}
             priority={false}
             unoptimized={true}
           />
@@ -50,4 +50,4 @@ const ImageData = ({ image }: { image: ResponsiveImageData }) => {
   }
 }
 
-export default ImageData
+export default PictureElement

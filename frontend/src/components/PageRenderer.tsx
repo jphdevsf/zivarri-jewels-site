@@ -17,7 +17,7 @@ const componentMap = {
   'content.freeform-text': FreeformText,
   'content.gallery': Gallery,
   'content.card-list': CardList,
-  'content.form-dynamic-zone': Form,
+  'content.contact-form': Form,
 } as const
 
 interface PageRendererProps {
@@ -27,14 +27,13 @@ interface PageRendererProps {
 
 const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   if (!data) return notFound()
-
   return (
     <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-4 px-4'>
       <h1 className="sr-only">{data.title}</h1>
       {blocks && blocks.map((banner: BlockBanner) => {
         const key = banner.__component as keyof typeof componentMap
         if (!(key in componentMap)) {
-          return <div key={banner.id}>Component not found: {banner.__component}</div>
+          return <div key={banner.id}>PageRenderer could not find component: {banner.__component}</div>
         }
         const Component = componentMap[key] as React.ComponentType<unknown>
         return React.createElement(Component, { key: banner.id, ...banner })

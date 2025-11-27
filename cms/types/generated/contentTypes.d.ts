@@ -389,7 +389,7 @@ export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
         'content.card-list',
         'content.hero',
         'content.freeform-text',
-        'content.form-dynamic-zone',
+        'content.contact-form',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

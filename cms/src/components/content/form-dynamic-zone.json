@@ -7,10 +7,8 @@
   },
   "options": {},
   "attributes": {
-    "form_items": {
-      "type": "component",
-      "repeatable": true,
-      "component": "element.form-item"
+    "title": {
+      "type": "string"
     }
   }
 }

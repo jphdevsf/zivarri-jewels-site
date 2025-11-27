@@ -1,6 +1,6 @@
 import type { CardBanner } from '@/types/content'
 import Lockup from './atomic/Lockup'
-import ImageData from './atomic/Image'
+import PictureElement from './atomic/Image'
 
 const Card = ({ lockup, image }: CardBanner) => {
   const links = lockup?.links
@@ -16,11 +16,11 @@ const Card = ({ lockup, image }: CardBanner) => {
       )} */}
       {firstLinkUrl ? (
         <a href={firstLinkUrl} className="aspect-square">
-          <ImageData image={image} />
+          <PictureElement image={image} />
         </a>
       ) : (
         <div className="aspect-square">
-          <ImageData image={image} />
+          <PictureElement image={image} />
         </div>
       )}
       <div className='flex flex-col relative justify-center'>
