@@ -19,11 +19,6 @@
         "files",
         "videos"
       ]
-    },
-    "schedule": {
-      "type": "component",
-      "repeatable": false,
-      "component": "element.schedule"
     }
   }
 }

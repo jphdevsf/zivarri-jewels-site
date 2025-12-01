@@ -25,6 +25,11 @@ export type GlobalSettingResponse = {
         mime?: string;
     }
 };
+interface Schedule {
+    id?: number;
+    date_start?: string;
+    date_end?: string;
+}
 
 // Block collection type for reusable content blocks
 export type BlockResponse = {
@@ -40,6 +45,7 @@ export type BlockResponse = {
         id: number;
         slug: string;
     }>;
+    schedule: Schedule;
 };
 
 export type PageAndSeoResponse = {

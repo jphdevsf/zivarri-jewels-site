@@ -21,11 +21,6 @@
       "type": "component",
       "repeatable": false,
       "component": "element.alignment"
-    },
-    "schedule": {
-      "type": "component",
-      "repeatable": false,
-      "component": "element.schedule"
     }
   }
 }

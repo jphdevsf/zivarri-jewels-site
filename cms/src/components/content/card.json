@@ -16,11 +16,6 @@
       "type": "component",
       "repeatable": false,
       "component": "element.image"
-    },
-    "schedule": {
-      "type": "component",
-      "repeatable": false,
-      "component": "element.schedule"
     }
   }
 }

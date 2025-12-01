@@ -147,13 +147,6 @@ const Hero = ({ lockup, image, lockup_align }: HeroComponent) => {
   const widthClass = width ? grid12[width - 1] : 'min-w-12/12'
   return (
     <div className='content-hero relative block bg-background dark:bg-background-dark'>
-      {/* {schedule && (
-        <div>
-          <h4>Schedule</h4>
-          <p>Start: {schedule.date_start}</p>
-          <p>End: {schedule.date_end}</p>
-        </div>
-      )} */}
       {firstLinkUrl && <a className='content-hero-hotspot absolute w-full h-full z-10' href={firstLinkUrl}></a>}
       <PictureElement image={image} />
       <div className={`content-hero-lockup-wrapper relative md:absolute top-0 left-0 w-full h-full flex flex-col pb-4 ${alignClasses}`}>

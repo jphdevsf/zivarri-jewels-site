@@ -7,7 +7,7 @@ import FreeformText from './blocks/FreeformText'
 import Gallery from './blocks/Gallery'
 import CardList from './blocks/CardList'
 import Form from './blocks/Form'
-import type { CMSBlock, Schedule } from '@/types/content'
+import type { CMSBlock } from '@/types/content'
 import React from 'react'
 
 const componentMap = {
@@ -25,16 +25,6 @@ interface PageRendererProps {
   blocks: CMSBlock[]; // Required blocks prop for reusable content
 }
 
-const isValidDate = (schedule: Schedule | null) => {
-  if (!schedule) return true
-  const currentDate = new Date().toISOString()
-  const { date_start, date_end } = {
-    date_start: new Date(schedule?.date_start || 0).toISOString(),
-    date_end: new Date(schedule?.date_end || currentDate).toISOString(),
-  }
-  return currentDate >= date_start && currentDate <= date_end
-}
-
 const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   if (!data) return notFound()
 
@@ -43,7 +33,6 @@ const PageRenderer = ({ data, blocks }: PageRendererProps) => {
     <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-4 px-4'>
       <h1 className="sr-only">{data.title}</h1>
       {blocks && blocks.map((block: CMSBlock) => {
-        if (!isValidDate(block.schedule)) return <></>
         const key = block.__component as keyof typeof componentMap
         if (!(key in componentMap)) {
           return <div key={block.id}>PageRenderer could not find component: {block.__component}</div>

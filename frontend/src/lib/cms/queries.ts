@@ -23,10 +23,6 @@ const dZImage = {
   }
 }
 
-const dZSchedule = {
-  populate: '*'
-}
-
 export const dynamicZoneQuery = {
   'content.card-list': {
     fields: ['title', 'carousel_desktop', 'carousel_mobile'],
@@ -35,7 +31,6 @@ export const dynamicZoneQuery = {
         populate: {
           lockup: dZLockup,
           image: dZImage,
-          schedule: dZSchedule,
         }
       }
     }
@@ -44,21 +39,18 @@ export const dynamicZoneQuery = {
     populate: {
       lockup: dZLockup,
       image: dZImage,
-      schedule: dZSchedule,
     }
   },
   'content.hero': {
     populate: {
       lockup: dZLockup,
       image: dZImage,
-      schedule: dZSchedule,
       lockup_align: dZLockupAlign
     }
   },
   'content.section-header': {
     populate: {
       lockup: dZLockup,
-      schedule: dZSchedule
     }
   },
   'content.gallery': {
@@ -67,7 +59,6 @@ export const dynamicZoneQuery = {
       images: {
         fields: ['url', 'width', 'height', 'alternativeText', 'formats'],
       },
-      schedule: dZSchedule
     }
   },
   'content.freeform-text': {

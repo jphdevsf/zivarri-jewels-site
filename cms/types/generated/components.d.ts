@@ -10,7 +10,6 @@ export interface ContentCard extends Struct.ComponentSchema {
   attributes: {
     image: Schema.Attribute.Component<'element.image', false>;
     lockup: Schema.Attribute.Component<'element.lockup', false>;
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
   };
 }
 
@@ -27,7 +26,6 @@ export interface ContentCardList extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<false>;
     carousel_mobile: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -40,7 +38,6 @@ export interface ContentContactForm extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -53,7 +50,6 @@ export interface ContentFreeformText extends Struct.ComponentSchema {
     icon: 'layer';
   };
   attributes: {
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
     text: Schema.Attribute.Blocks;
   };
 }
@@ -67,7 +63,6 @@ export interface ContentGallery extends Struct.ComponentSchema {
   };
   attributes: {
     images: Schema.Attribute.Media<'images' | 'files' | 'videos', true>;
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -83,7 +78,6 @@ export interface ContentHero extends Struct.ComponentSchema {
     image: Schema.Attribute.Component<'element.image', false>;
     lockup: Schema.Attribute.Component<'element.lockup', false>;
     lockup_align: Schema.Attribute.Component<'element.alignment', false>;
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
   };
 }
 
@@ -96,7 +90,6 @@ export interface ContentSectionHeader extends Struct.ComponentSchema {
   };
   attributes: {
     lockup: Schema.Attribute.Component<'element.lockup', false>;
-    schedule: Schema.Attribute.Component<'element.schedule', false>;
   };
 }
 

@@ -20,12 +20,6 @@ interface ResponsiveImage {
   };
 }
 
-export interface Schedule {
-  id?: number;
-  date_start?: string;
-  date_end?: string;
-}
-
 interface Lockup_align {
   id: number;
   text_align: string;
@@ -91,7 +85,6 @@ export interface Lockup {
 export interface CmsComponent {
   id: number | string;
   __component: string;
-  schedule: Schedule | null;
 }
 
 export interface HeroComponent extends CmsComponent {
