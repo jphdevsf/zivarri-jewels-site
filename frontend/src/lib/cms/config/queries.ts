@@ -65,7 +65,7 @@ export const dynamicZoneQuery = {
     fields: ['title'],
     populate: {
       images: {
-        fields: ['url', 'width', 'height', 'alternativeText']
+        fields: ['url', 'width', 'height', 'alternativeText', 'formats'],
       },
       schedule: dZSchedule
     }

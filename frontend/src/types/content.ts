@@ -38,6 +38,32 @@ interface Lockup_align {
 }
 
 // Exported types
+export type StrapiImage = {
+  id: number;
+  documentId: string;
+  url: string;
+  width: number;
+  height: number;
+  alternativeText?: string;
+  formats: {
+    small: {
+      url: string;
+      width: number;
+      height: number;
+    }
+    medium: {
+      url: string;
+      width: number;
+      height: number;
+    }
+    thumbnail: {
+      url: string;
+      width: number;
+      height: number;
+    }
+  }
+}
+
 export type BlockBanner =
   | HeroBanner
   | CardBanner
@@ -65,13 +91,13 @@ export interface Lockup {
 export interface BaseBanner {
   id: number | string;
   __component: string;
+  schedule: Schedule | null;
 }
 
 export interface HeroBanner extends BaseBanner {
   __component: 'content.hero';
   lockup: Lockup;
   image: ResponsiveImage;
-  schedule: Schedule | null;
   lockup_align: Lockup_align;
 }
 
@@ -79,33 +105,22 @@ export interface CardBanner extends BaseBanner {
   __component: 'content.card';
   lockup: Lockup;
   image: ResponsiveImage
-  schedule: Schedule | null;
 }
 
 export interface SectionHeaderBanner extends BaseBanner {
   __component: 'content.section-header';
   lockup: Lockup;
-  schedule: Schedule | null;
 }
 
 export interface FreeformTextBanner extends BaseBanner {
   __component: 'content.freeform-text';
   text: BlocksContent;
-  schedule: Schedule | null;
 }
 
 export interface GalleryBanner extends BaseBanner {
   __component: 'content.gallery';
   title: string;
-  images: Array<{
-    id: number;
-    documentId: string;
-    url: string;
-    width: number;
-    height: number;
-    alternativeText?: string;
-  }>;
-  schedule: Schedule | null;
+  images: Array<StrapiImage>;
 }
 
 export interface CardListBanner extends BaseBanner {
