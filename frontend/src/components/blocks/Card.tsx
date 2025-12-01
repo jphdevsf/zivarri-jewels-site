@@ -1,8 +1,8 @@
-import type { CardBanner } from '@/types/content'
+import type { CardComponent } from '@/types/content'
 import Lockup from './atomic/Lockup'
 import PictureElement from './atomic/Image'
 
-const Card = ({ lockup, image }: CardBanner) => {
+const Card = ({ lockup, image }: CardComponent) => {
   const links = lockup?.links
   const firstLinkUrl = links && links.length > 0 ? links[0]?.url : null
   return (

@@ -1,7 +1,7 @@
-import type { SectionHeaderBanner } from '@/types/content'
+import type { SectionHeaderComponent } from '@/types/content'
 import Lockup from './atomic/Lockup'
 
-const SectionHeader = ({ lockup }: SectionHeaderBanner) => {
+const SectionHeader = ({ lockup }: SectionHeaderComponent) => {
   return (
     <div className='content-section-header'>
       {/* <div>

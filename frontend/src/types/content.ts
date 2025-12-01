@@ -20,10 +20,10 @@ interface ResponsiveImage {
   };
 }
 
-interface Schedule {
-  id: number;
-  date_start: string;
-  date_end: string;
+export interface Schedule {
+  id?: number;
+  date_start?: string;
+  date_end?: string;
 }
 
 interface Lockup_align {
@@ -64,14 +64,14 @@ export type StrapiImage = {
   }
 }
 
-export type BlockBanner =
-  | HeroBanner
-  | CardBanner
-  | SectionHeaderBanner
-  | FreeformTextBanner
-  | GalleryBanner
-  | CardListBanner
-  | FormBlock;
+export type CMSBlock =
+  | HeroComponent
+  | CardComponent
+  | SectionHeaderComponent
+  | FreeformTextComponent
+  | GalleryComponent
+  | CardListComponent
+  | FormComponent;
 
 export interface Lockup {
   id: number;
@@ -88,50 +88,50 @@ export interface Lockup {
   }>;
 }
 
-export interface BaseBanner {
+export interface CmsComponent {
   id: number | string;
   __component: string;
   schedule: Schedule | null;
 }
 
-export interface HeroBanner extends BaseBanner {
+export interface HeroComponent extends CmsComponent {
   __component: 'content.hero';
   lockup: Lockup;
   image: ResponsiveImage;
   lockup_align: Lockup_align;
 }
 
-export interface CardBanner extends BaseBanner {
+export interface CardComponent extends CmsComponent {
   __component: 'content.card';
   lockup: Lockup;
   image: ResponsiveImage
 }
 
-export interface SectionHeaderBanner extends BaseBanner {
+export interface SectionHeaderComponent extends CmsComponent {
   __component: 'content.section-header';
   lockup: Lockup;
 }
 
-export interface FreeformTextBanner extends BaseBanner {
+export interface FreeformTextComponent extends CmsComponent {
   __component: 'content.freeform-text';
   text: BlocksContent;
 }
 
-export interface GalleryBanner extends BaseBanner {
+export interface GalleryComponent extends CmsComponent {
   __component: 'content.gallery';
   title: string;
   images: Array<StrapiImage>;
 }
 
-export interface CardListBanner extends BaseBanner {
+export interface CardListComponent extends CmsComponent {
   __component: 'content.card-list';
   title: string;
   carousel_desktop: boolean;
   carousel_mobile: boolean;
-  cards: CardBanner[];
+  cards: CardComponent[];
 }
 
-export interface FormBlock extends BaseBanner {
+export interface FormComponent extends CmsComponent {
   __component: 'content.contact-form';
   title: string;
 }

@@ -1,9 +1,9 @@
 import { getCmsData } from '@/lib/cms/getCmsData'
 import type { BlockResponse } from '@/types/CMSResponse'
-import type { BlockBanner } from '@/types/content'
+import type { CMSBlock } from '@/types/content'
 import { dynamicZoneQuery } from '@/lib/cms/config/queries'
 
-export const getPageBanners = async (slug: string): Promise<BlockBanner[]> => {
+export const getPageBlocks = async (slug: string): Promise<CMSBlock[]> => {
   const res = await getCmsData<BlockResponse[]>('blocks', {
     filters: {
       pages: {
@@ -26,6 +26,6 @@ export const getPageBanners = async (slug: string): Promise<BlockBanner[]> => {
     const orderB = b.page_order || 1
     return orderA - orderB
   })
-  const content = blocks.flatMap(block => block.content || []).filter(Boolean) as BlockBanner[]
+  const content = blocks.flatMap(block => block.content || []).filter(Boolean) as CMSBlock[]
   return content
 }

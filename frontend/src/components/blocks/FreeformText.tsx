@@ -1,7 +1,7 @@
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
-import type { FreeformTextBanner } from '@/types/content'
+import type { FreeformTextComponent } from '@/types/content'
 
-const FreeformText = ({ text }: FreeformTextBanner) => {
+const FreeformText = ({ text }: FreeformTextComponent) => {
   return (
     <div className="content-freeform-text text-primary block px-8 py-12 dark:text-primary-dark bg-background dark:bg-background-dark">
       {/* <div>

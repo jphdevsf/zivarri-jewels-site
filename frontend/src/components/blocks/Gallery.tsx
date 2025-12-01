@@ -2,10 +2,10 @@
 
 import { useState, useRef } from 'react'
 import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
-import ImageModal from './ImageModal'
-import type { GalleryBanner, StrapiImage } from '@/types/content'
+import ImageModal from './atomic/ImageModal'
+import type { GalleryComponent, StrapiImage } from '@/types/content'
 
-const Gallery = ({ title, images }: GalleryBanner) => {
+const Gallery = ({ title, images }: GalleryComponent) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState<StrapiImage | null>(null)
   const openedButtonRef = useRef<HTMLButtonElement | null>(null)

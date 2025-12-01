@@ -1,7 +1,7 @@
-import type { CardListBanner } from '@/types/content'
+import type { CardListComponent } from '@/types/content'
 import Card from './Card'
 
-const CardList = ({ title, carousel_desktop, carousel_mobile, cards }: CardListBanner) => {
+const CardList = ({ title, carousel_desktop, carousel_mobile, cards }: CardListComponent) => {
   return (
     <div className='content-card-list'>
       {/* <p>Carousel Desktop: {carousel_desktop ? 'Yes' : 'No'}</p>

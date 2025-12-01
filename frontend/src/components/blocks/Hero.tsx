@@ -1,4 +1,4 @@
-import type { HeroBanner } from '@/types/content'
+import type { HeroComponent } from '@/types/content'
 import Lockup from './atomic/Lockup'
 import PictureElement from './atomic/Image'
 
@@ -131,7 +131,7 @@ const grid12 = [
   'min-w-12/12'
 ]
 
-const Hero = ({ lockup, image, lockup_align }: HeroBanner) => {
+const Hero = ({ lockup, image, lockup_align }: HeroComponent) => {
   const { links, width } = lockup || {}
   const firstLinkUrl = links && links.length > 0 ? links[0].url : null
   const offsetClasses = lockup_align && `${topOffsetClasses[lockup_align.offset_top | 0]} ${rightOffsetClasses[lockup_align.offset_right | 0]} ${bottomOffsetClasses[lockup_align.offset_bottom | 0]} ${leftOffsetClasses[lockup_align.offset_left | 0]}` || ''

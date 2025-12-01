@@ -1,5 +1,5 @@
 import type { BlocksContent } from '@strapi/blocks-react-renderer'
-import type { BlockBanner } from './content'
+import type { CMSBlock } from './content'
 
 export type GlobalSettingResponse = {
     id: number;
@@ -35,7 +35,7 @@ export type BlockResponse = {
     updatedAt: string;
     publishedAt: string;
     page_order?: number;
-    content: BlockBanner;
+    content: CMSBlock;
     pages?: Array<{
         id: number;
         slug: string;

@@ -1,10 +1,10 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import type { FormBlock, FormData } from '@/types/content'
+import type { FormComponent, FormData } from '@/types/content'
 import { useState } from 'react'
 
-const Form = ({ title }: FormBlock) => {
+const Form = ({ title }: FormComponent) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')

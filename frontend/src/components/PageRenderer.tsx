@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation'
 import type { PageAndSeoResponse } from '@/types/CMSResponse'
-import Hero from './content/Hero'
-import Card from './content/Card'
-import SectionHeader from './content/SectionHeader'
-import FreeformText from './content/FreeformText'
-import Gallery from './content/Gallery'
-import CardList from './content/CardList'
-import Form from './content/Form'
-import type { BlockBanner, Schedule } from '@/types/content'
+import Hero from './blocks/Hero'
+import Card from './blocks/Card'
+import SectionHeader from './blocks/SectionHeader'
+import FreeformText from './blocks/FreeformText'
+import Gallery from './blocks/Gallery'
+import CardList from './blocks/CardList'
+import Form from './blocks/Form'
+import type { CMSBlock, Schedule } from '@/types/content'
 import React from 'react'
 
 const componentMap = {
@@ -22,10 +22,10 @@ const componentMap = {
 
 interface PageRendererProps {
   data: PageAndSeoResponse;
-  blocks: BlockBanner[]; // Required blocks prop for reusable content
+  blocks: CMSBlock[]; // Required blocks prop for reusable content
 }
 
-const isValidDate = (schedule: Schedule) => {
+const isValidDate = (schedule: Schedule | null) => {
   if (!schedule) return true
   const currentDate = new Date().toISOString()
   const { date_start, date_end } = {
@@ -42,15 +42,14 @@ const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   return (
     <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-4 px-4'>
       <h1 className="sr-only">{data.title}</h1>
-      {blocks && blocks.map((banner: BlockBanner) => {
-        if (!isValidDate(banner.schedule)) return <></>
-        const key = banner.__component as keyof typeof componentMap
-        if (key === 'content.gallery') console.log(JSON.stringify(banner, null, 2))
+      {blocks && blocks.map((block: CMSBlock) => {
+        if (!isValidDate(block.schedule)) return <></>
+        const key = block.__component as keyof typeof componentMap
         if (!(key in componentMap)) {
-          return <div key={banner.id}>PageRenderer could not find component: {banner.__component}</div>
+          return <div key={block.id}>PageRenderer could not find component: {block.__component}</div>
         }
         const Component = componentMap[key] as React.ComponentType<unknown>
-        return React.createElement(Component, { key: banner.id, ...banner })
+        return React.createElement(Component, { key: block.id, ...block })
       })}
     </main>
   )
