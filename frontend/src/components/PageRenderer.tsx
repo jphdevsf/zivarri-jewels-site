@@ -7,7 +7,7 @@ import FreeformText from './content/FreeformText'
 import Gallery from './content/Gallery'
 import CardList from './content/CardList'
 import Form from './content/Form'
-import type { BlockBanner } from '@/types/content'
+import type { BlockBanner, Schedule } from '@/types/content'
 import React from 'react'
 
 const componentMap = {
@@ -25,13 +25,27 @@ interface PageRendererProps {
   blocks: BlockBanner[]; // Required blocks prop for reusable content
 }
 
+const isValidDate = (schedule: Schedule) => {
+  if (!schedule) return true
+  const currentDate = new Date().toISOString()
+  const { date_start, date_end } = {
+    date_start: new Date(schedule?.date_start || 0).toISOString(),
+    date_end: new Date(schedule?.date_end || currentDate).toISOString(),
+  }
+  return currentDate >= date_start && currentDate <= date_end
+}
+
 const PageRenderer = ({ data, blocks }: PageRendererProps) => {
   if (!data) return notFound()
+
+
   return (
     <main className='w-full max-w-7xl relative mx-auto my-8 flex flex-col gap-4 px-4'>
       <h1 className="sr-only">{data.title}</h1>
       {blocks && blocks.map((banner: BlockBanner) => {
+        if (!isValidDate(banner.schedule)) return <></>
         const key = banner.__component as keyof typeof componentMap
+        if (key === 'content.gallery') console.log(JSON.stringify(banner, null, 2))
         if (!(key in componentMap)) {
           return <div key={banner.id}>PageRenderer could not find component: {banner.__component}</div>
         }

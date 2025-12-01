@@ -35,22 +35,12 @@ export interface ContentCardList extends Struct.ComponentSchema {
 export interface ContentContactForm extends Struct.ComponentSchema {
   collectionName: 'components_content_contact_forms';
   info: {
+    description: '';
     displayName: 'Contact Form';
     icon: 'bulletList';
   };
   attributes: {
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface ContentFormDynamicZone extends Struct.ComponentSchema {
-  collectionName: 'components_content_form_dynamic_zones';
-  info: {
-    description: '';
-    displayName: 'Form';
-    icon: 'expand';
-  };
-  attributes: {
+    schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -208,10 +198,12 @@ export interface ElementLink extends Struct.ComponentSchema {
     icon: 'arrowRight';
   };
   attributes: {
+    hide_title: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hierarchy: Schema.Attribute.Component<'element.hierarchy', false>;
     icon: Schema.Attribute.Media<'images' | 'files'>;
+    page: Schema.Attribute.Relation<'oneToOne', 'api::page.page'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    url: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -309,7 +301,6 @@ declare module '@strapi/strapi' {
       'content.card': ContentCard;
       'content.card-list': ContentCardList;
       'content.contact-form': ContentContactForm;
-      'content.form-dynamic-zone': ContentFormDynamicZone;
       'content.freeform-text': ContentFreeformText;
       'content.gallery': ContentGallery;
       'content.hero': ContentHero;

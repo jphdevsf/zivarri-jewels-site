@@ -409,6 +409,7 @@ export interface ApiBlockBlock extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<1>;
     pages: Schema.Attribute.Relation<'manyToMany', 'api::page.page'>;
     publishedAt: Schema.Attribute.DateTime;
+    schedule: Schema.Attribute.Component<'element.schedule', false>;
     title: Schema.Attribute.String & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -442,6 +443,66 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
     navigation: Schema.Attribute.Component<'global.header', true>;
     publishedAt: Schema.Attribute.DateTime;
     siteName: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavigationFooterNavigationFooter
+  extends Struct.SingleTypeSchema {
+  collectionName: 'navigation_footers';
+  info: {
+    displayName: 'Navigation - Footer';
+    pluralName: 'navigation-footers';
+    singularName: 'navigation-footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    legal_links: Schema.Attribute.Component<'element.link', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigation-footer.navigation-footer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    social_links: Schema.Attribute.Component<'element.link', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavigationMainNavigationMain
+  extends Struct.SingleTypeSchema {
+  collectionName: 'navigation_mains';
+  info: {
+    description: '';
+    displayName: 'Navigation - Header';
+    pluralName: 'navigation-mains';
+    singularName: 'navigation-main';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    links: Schema.Attribute.Component<'element.link', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigation-main.navigation-main'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -988,6 +1049,8 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::block.block': ApiBlockBlock;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
+      'api::navigation-footer.navigation-footer': ApiNavigationFooterNavigationFooter;
+      'api::navigation-main.navigation-main': ApiNavigationMainNavigationMain;
       'api::page.page': ApiPagePage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

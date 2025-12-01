@@ -2,12 +2,18 @@
   "collectionName": "components_content_contact_forms",
   "info": {
     "displayName": "Contact Form",
-    "icon": "bulletList"
+    "icon": "bulletList",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "schedule": {
+      "type": "component",
+      "repeatable": false,
+      "component": "element.schedule"
     }
   }
 }
