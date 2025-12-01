@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "navigation_mains",
+  "info": {
+    "singularName": "navigation-main",
+    "pluralName": "navigation-mains",
+    "displayName": "Navigation - Header",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.link"
+    }
+  }
+}

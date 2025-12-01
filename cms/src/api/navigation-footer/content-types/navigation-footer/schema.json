@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "navigation_footers",
+  "info": {
+    "singularName": "navigation-footer",
+    "pluralName": "navigation-footers",
+    "displayName": "Navigation - Footer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "legal_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.link"
+    },
+    "social_links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "element.link"
+    }
+  }
+}

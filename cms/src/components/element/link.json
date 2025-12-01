@@ -13,7 +13,7 @@
     },
     "url": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "icon": {
       "type": "media",
@@ -28,6 +28,15 @@
       "type": "component",
       "repeatable": false,
       "component": "element.hierarchy"
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::page.page"
+    },
+    "hide_title": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
