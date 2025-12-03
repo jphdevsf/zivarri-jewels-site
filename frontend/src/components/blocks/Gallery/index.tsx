@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { toAbsoluteStrapiUrl } from '@/lib/cms/toAbsoluteStrapiUrl'
-import ImageModal from './atomic/ImageModal'
+import ModalOverlay from './atomic/ModalOverlay'
 import type { GalleryComponent, StrapiImage } from '@/types/content'
 
 const Gallery = ({ title, images }: GalleryComponent) => {
@@ -59,7 +59,7 @@ const Gallery = ({ title, images }: GalleryComponent) => {
       </ul>
       {
         isModalOpen && selectedImage && (
-          <ImageModal
+          <ModalOverlay
             isOpen={isModalOpen}
             selectedImage={selectedImage}
             images={images}
