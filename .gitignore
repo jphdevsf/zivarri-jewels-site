@@ -1,1 +1,4 @@
 todo.md
+.vscode/
+.continue/
+node_modules/
