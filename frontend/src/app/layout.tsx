@@ -7,8 +7,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Logo from '@/components/Logo'
 import Navigation from '@/components/Navigation'
-import type { GlobalSettingResponse } from '@/types/CMSResponse'
-import { ThemeProvider } from 'next-themes'
+import type { GlobalSettingResponse, NavigationHeaderResponse } from '@/types/CMSResponse'
+import Link from 'next/link'
+import ThemeProviderWrapper from '@/components/ThemeProviderWrapper'
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -102,36 +103,48 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     populate: {
       logo: {
         populate: '*'
-      },
-      navigation: {
-        populate: 'links'
       }
     }
   })
   const globalSetting = res.data as GlobalSettingResponse
   const logo = globalSetting?.logo
-  const navigation = globalSetting?.navigation
+
+  const navHeaderRes = await getCmsData('navigation-main', {
+    populate: {
+      links: {
+        fields: ['title', 'url'],
+        populate: '*'
+      }
+    }
+
+  })
+  const NavigationHeader = navHeaderRes.data as NavigationHeaderResponse
+  const navigation = NavigationHeader.links
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
+      <body 
         className={`${roboto.variable} ${eb_garamond.variable} ${walkwayExpand.variable} ${walkwayExpandBlack.variable} ${walkwayBold.variable} ${EauBook.variable} ${EauBold.variable} ${EauBlack.variable} antialiased bg-background-secondary dark:bg-background-secondary-dark transition-all duration-300`}
+        suppressHydrationWarning
       >
-        <ThemeProvider attribute='class' enableSystem defaultTheme='system'>
+        <ThemeProviderWrapper>
           <Header>
             <Logo logo={logo} />
-            <Navigation navigation={navigation} />
+            <Navigation links={navigation} />
           </Header>
           {children}
           <Footer>
-            <p className='block text-xs'>
-              © 2025 Zivarri Jewels
-              &nbsp;| <a href="/privacy-policy" className='inline underline'>Privacy Policy</a>
-              &nbsp;| <a href="/terms-of-use" className='inline underline'>Terms of Use</a>
-              &nbsp;| <a href="/disclaimer" className='inline underline'>Disclaimer</a>
-              &nbsp;| <a href="/accessibility" className='inline underline'>Accessibility</a>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              &copy; 2025 Zivarri Jewels. All rights reserved. &nbsp; | &nbsp;
+              <Link href="/privacy-policy" className="inline underline">Privacy Policy</Link>
+              &nbsp; | &nbsp;
+              <Link href="/terms-of-use" className="inline underline">Terms of Use</Link>
+              &nbsp; | &nbsp;
+              <Link href="/disclaimer" className="inline underline">Disclaimer</Link>
+              &nbsp; | &nbsp;
+              <Link href="/accessibility" className="inline underline">Accessibility</Link>
             </p>
           </Footer>
-        </ThemeProvider>
+        </ThemeProviderWrapper>
       </body>
     </html>
   )

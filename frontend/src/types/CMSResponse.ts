@@ -9,13 +9,13 @@ export type GlobalSettingResponse = {
     publishedAt: string;
     siteName?: string;
     companyName?: string;
-    navigation?: Array<{
-        links?: Array<{
-            title?: number;
-            url?: string;
-            id?: number;
-        }>
-    }>;
+    // navigation?: Array<{
+    //     links?: Array<{
+    //         title?: number;
+    //         url?: string;
+    //         id?: number;
+    //     }>
+    // }>;
     logo?: {
         alternativeText?: string;
         caption?: string;
@@ -25,6 +25,30 @@ export type GlobalSettingResponse = {
         mime?: string;
     }
 };
+export type NavigationHeaderResponse = {
+    id: number;
+    links?: Array<{
+        title?: number;
+        icon?: {
+          url?: string;
+          mime?: string;
+          width?: number;
+          height?: number;
+          alternativeText?: string;
+        };
+        url?: string;
+        id?: number;
+        hide_title?: boolean;
+        hierarchy?: {
+          priority?: string
+        };
+        page?: {
+            title?: string,
+            slug?: string
+        };
+    }>
+}
+
 interface Schedule {
     id?: number;
     date_start?: string;
