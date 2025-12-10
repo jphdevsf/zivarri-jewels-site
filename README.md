@@ -1,4 +1,4 @@
-# 🛠 Zivarri Jewels Site — Monorepo Stack
+# <img src="assets/diamond-icon-3.svg" width="64" height="64" style="background-color:#ffffff; padding: 4px; border-radius: 15%;" /> Zivarri Jewels Site — Monorepo Stack
 
 - [About The Stack](#about-the-stack)
 - [Roadmap-Lite](#roadmap-lite)
